@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file
+   path="onchip_ver_qsys/testbench/onchip_ver_qsys_tb/simulation/submodules/altera_reset_controller.v"
+   type="VERILOG"
+   library="rst_controller" />
+ <file
+   path="onchip_ver_qsys/testbench/onchip_ver_qsys_tb/simulation/submodules/altera_reset_synchronizer.v"
+   type="VERILOG"
+   library="rst_controller" />
+ <file
+   path="onchip_ver_qsys/testbench/onchip_ver_qsys_tb/simulation/submodules/altera_reset_controller.sdc"
+   type="SDC"
+   library="rst_controller" />
+ <file
+   path="onchip_ver_qsys/testbench/onchip_ver_qsys_tb/simulation/submodules/altera_merlin_slave_translator.sv"
+   type="SYSTEM_VERILOG"
+   library="onchip_memory2_0_s1_translator" />
+ <file
+   path="onchip_ver_qsys/testbench/onchip_ver_qsys_tb/simulation/submodules/altera_merlin_master_translator.sv"
+   type="SYSTEM_VERILOG"
+   library="read_master_avalon_master_translator" />
+ <file
+   path="onchip_ver_qsys/testbench/onchip_ver_qsys_tb/simulation/submodules/onchip_ver_qsys_onchip_memory2_0.v"
+   type="VERILOG"
+   library="onchip_memory2_0" />
+ <file
+   path="onchip_ver_qsys/testbench/onchip_ver_qsys_tb/simulation/submodules/onchip_ver_qsys_onchip_memory2_0.hex"
+   type="HEX"
+   library="onchip_memory2_0" />
+ <file
+   path="onchip_ver_qsys/testbench/onchip_ver_qsys_tb/simulation/submodules/custom_master.v"
+   type="VERILOG"
+   library="write_master" />
+ <file
+   path="onchip_ver_qsys/testbench/onchip_ver_qsys_tb/simulation/submodules/burst_write_master.v"
+   type="VERILOG"
+   library="write_master" />
+ <file
+   path="onchip_ver_qsys/testbench/onchip_ver_qsys_tb/simulation/submodules/burst_read_master.v"
+   type="VERILOG"
+   library="write_master" />
+ <file
+   path="onchip_ver_qsys/testbench/onchip_ver_qsys_tb/simulation/submodules/write_master.v"
+   type="VERILOG"
+   library="write_master" />
+ <file
+   path="onchip_ver_qsys/testbench/onchip_ver_qsys_tb/simulation/submodules/latency_aware_read_master.v"
+   type="VERILOG"
+   library="write_master" />
+ <file
+   path="onchip_ver_qsys/testbench/onchip_ver_qsys_tb/simulation/submodules/verbosity_pkg.sv"
+   type="SYSTEM_VERILOG"
+   library="onchip_ver_qsys_inst_reset_bfm" />
+ <file
+   path="onchip_ver_qsys/testbench/onchip_ver_qsys_tb/simulation/submodules/altera_avalon_reset_source.sv"
+   type="SYSTEM_VERILOG"
+   library="onchip_ver_qsys_inst_reset_bfm" />
+ <file
+   path="onchip_ver_qsys/testbench/onchip_ver_qsys_tb/simulation/submodules/verbosity_pkg.sv"
+   type="SYSTEM_VERILOG"
+   library="onchip_ver_qsys_inst_clk_bfm" />
+ <file
+   path="onchip_ver_qsys/testbench/onchip_ver_qsys_tb/simulation/submodules/altera_avalon_clock_source.sv"
+   type="SYSTEM_VERILOG"
+   library="onchip_ver_qsys_inst_clk_bfm" />
+ <file
+   path="onchip_ver_qsys/testbench/onchip_ver_qsys_tb/simulation/submodules/onchip_ver_qsys.v"
+   type="VERILOG"
+   library="onchip_ver_qsys_inst" />
+ <file
+   path="onchip_ver_qsys/testbench/onchip_ver_qsys_tb/simulation/onchip_ver_qsys_tb.v"
+   type="VERILOG" />
+ <topLevel name="onchip_ver_qsys_tb" />
+ <deviceFamily name="cycloneivgx" />
+ <modelMap
+   controllerPath="onchip_ver_qsys_tb.onchip_ver_qsys_inst.onchip_memory2_0"
+   modelPath="onchip_ver_qsys_tb.onchip_ver_qsys_inst.onchip_memory2_0" />
+</simPackage>

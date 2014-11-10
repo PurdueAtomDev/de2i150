@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="master_example">
+		<CBX_INST_ENTRY INSTANCE_NAME="|master_example|amm_master_qsys:amm_master_inst|custom_master:read_master|latency_aware_read_master:a_latency_aware_read_master|scfifo:the_master_to_user_fifo" CBX_FILE_NAME="scfifo_pb01.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|master_example|amm_master_qsys:amm_master_inst|custom_master:write_master|write_master:a_write_master|scfifo:the_user_to_master_fifo" CBX_FILE_NAME="scfifo_5801.tdf"/>
+	</PROJECT>
+</LOG_ROOT>

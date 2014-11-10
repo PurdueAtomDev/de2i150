@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system name="$${FILENAME}">
+ <component
+   name="$${FILENAME}"
+   displayName="$${FILENAME}"
+   version="1.0"
+   description=""
+   tags=""
+   categories="System" />
+ <parameter name="bonusData"><![CDATA[bonusData 
+{
+   element $${FILENAME}
+   {
+   }
+   element clk_0
+   {
+      datum _sortIndex
+      {
+         value = "0";
+         type = "int";
+      }
+   }
+   element new_sdram_controller_0
+   {
+      datum _sortIndex
+      {
+         value = "1";
+         type = "int";
+      }
+   }
+   element read_master
+   {
+      datum _sortIndex
+      {
+         value = "3";
+         type = "int";
+      }
+   }
+   element write_master
+   {
+      datum _sortIndex
+      {
+         value = "2";
+         type = "int";
+      }
+   }
+}
+]]></parameter>
+ <parameter name="clockCrossingAdapter" value="HANDSHAKE" />
+ <parameter name="device" value="EP4CGX150DF31C7" />
+ <parameter name="deviceFamily" value="Cyclone IV GX" />
+ <parameter name="deviceSpeedGrade" value="7" />
+ <parameter name="fabricMode" value="QSYS" />
+ <parameter name="generateLegacySim" value="false" />
+ <parameter name="generationId" value="0" />
+ <parameter name="globalResetBus" value="false" />
+ <parameter name="hdlLanguage" value="VERILOG" />
+ <parameter name="maxAdditionalLatency" value="1" />
+ <parameter name="projectName" value="master_example.qpf" />
+ <parameter name="sopcBorderPoints" value="false" />
+ <parameter name="systemHash" value="1" />
+ <parameter name="timeStamp" value="1415301594263" />
+ <parameter name="useTestBenchNamingPattern" value="false" />
+ <instanceScript></instanceScript>
+ <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
+ <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
+ <interface
+   name="new_sdram_controller_0_wire"
+   internal="new_sdram_controller_0.wire"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="write_master_control"
+   internal="write_master.control"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="write_master_user"
+   internal="write_master.user"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="read_master_control"
+   internal="read_master.control"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="read_master_user"
+   internal="read_master.user"
+   type="conduit"
+   dir="end" />
+ <module kind="clock_source" version="13.0" enabled="1" name="clk_0">
+  <parameter name="clockFrequency" value="50000000" />
+  <parameter name="clockFrequencyKnown" value="true" />
+  <parameter name="inputClockFrequency" value="0" />
+  <parameter name="resetSynchronousEdges" value="NONE" />
+ </module>
+ <module
+   kind="altera_avalon_new_sdram_controller"
+   version="13.0.1.99.2"
+   enabled="1"
+   name="new_sdram_controller_0">
+  <parameter name="TAC" value="5.5" />
+  <parameter name="TRCD" value="20.0" />
+  <parameter name="TRFC" value="70.0" />
+  <parameter name="TRP" value="20.0" />
+  <parameter name="TWR" value="14.0" />
+  <parameter name="casLatency" value="3" />
+  <parameter name="columnWidth" value="10" />
+  <parameter name="dataWidth" value="32" />
+  <parameter name="generateSimulationModel" value="false" />
+  <parameter name="initRefreshCommands" value="2" />
+  <parameter name="model">single_Micron_MT48LC4M32B2_7_chip</parameter>
+  <parameter name="numberOfBanks" value="4" />
+  <parameter name="numberOfChipSelects" value="1" />
+  <parameter name="pinsSharedViaTriState" value="false" />
+  <parameter name="powerUpDelay" value="100.0" />
+  <parameter name="refreshPeriod" value="15.625" />
+  <parameter name="rowWidth" value="12" />
+  <parameter name="masteredTristateBridgeSlave" value="0" />
+  <parameter name="TMRD" value="3" />
+  <parameter name="initNOPDelay" value="0.0" />
+  <parameter name="registerDataIn" value="true" />
+  <parameter name="clockRate" value="50000000" />
+  <parameter name="componentName">$${FILENAME}_new_sdram_controller_0</parameter>
+ </module>
+ <module kind="master_template" version="1.0" enabled="1" name="write_master">
+  <parameter name="MASTER_DIRECTION" value="1" />
+  <parameter name="DATA_WIDTH" value="32" />
+  <parameter name="ADDRESS_WIDTH" value="26" />
+  <parameter name="BURST_CAPABLE" value="0" />
+  <parameter name="MAXIMUM_BURST_COUNT" value="2" />
+  <parameter name="BURST_COUNT_WIDTH" value="2" />
+  <parameter name="FIFO_DEPTH" value="16" />
+  <parameter name="FIFO_DEPTH_LOG2" value="4" />
+  <parameter name="MEMORY_BASED_FIFO" value="1" />
+  <parameter name="AUTO_CLOCK_RESET_CLOCK_RATE" value="50000000" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV GX" />
+ </module>
+ <module kind="master_template" version="1.0" enabled="1" name="read_master">
+  <parameter name="MASTER_DIRECTION" value="0" />
+  <parameter name="DATA_WIDTH" value="32" />
+  <parameter name="ADDRESS_WIDTH" value="26" />
+  <parameter name="BURST_CAPABLE" value="0" />
+  <parameter name="MAXIMUM_BURST_COUNT" value="2" />
+  <parameter name="BURST_COUNT_WIDTH" value="2" />
+  <parameter name="FIFO_DEPTH" value="32" />
+  <parameter name="FIFO_DEPTH_LOG2" value="5" />
+  <parameter name="MEMORY_BASED_FIFO" value="1" />
+  <parameter name="AUTO_CLOCK_RESET_CLOCK_RATE" value="50000000" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV GX" />
+ </module>
+ <connection
+   kind="reset"
+   version="13.0"
+   start="clk_0.clk_reset"
+   end="new_sdram_controller_0.reset" />
+ <connection
+   kind="clock"
+   version="13.0"
+   start="clk_0.clk"
+   end="new_sdram_controller_0.clk" />
+ <connection
+   kind="clock"
+   version="13.0"
+   start="clk_0.clk"
+   end="write_master.clock_reset" />
+ <connection
+   kind="reset"
+   version="13.0"
+   start="clk_0.clk_reset"
+   end="write_master.clock_reset_reset" />
+ <connection
+   kind="avalon"
+   version="13.0"
+   start="write_master.avalon_master"
+   end="new_sdram_controller_0.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="clock"
+   version="13.0"
+   start="clk_0.clk"
+   end="read_master.clock_reset" />
+ <connection
+   kind="reset"
+   version="13.0"
+   start="clk_0.clk_reset"
+   end="read_master.clock_reset_reset" />
+ <connection
+   kind="avalon"
+   version="13.0"
+   start="read_master.avalon_master"
+   end="new_sdram_controller_0.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
+ <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="1" />
+</system>

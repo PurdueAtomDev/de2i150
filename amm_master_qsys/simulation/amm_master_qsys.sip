@@ -1,0 +1,28 @@
+set_global_assignment -entity "amm_master_qsys" -library "lib_amm_master_qsys" -name IP_TOOL_NAME "Qsys"
+set_global_assignment -entity "amm_master_qsys" -library "lib_amm_master_qsys" -name IP_TOOL_VERSION "13.0sp1"
+set_global_assignment -entity "amm_master_qsys" -library "lib_amm_master_qsys" -name IP_TOOL_ENV "Qsys"
+set_global_assignment -library "lib_amm_master_qsys" -name SPD_FILE [file join $::quartus(sip_path) "../../amm_master_qsys.spd"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "../../amm_master_qsys.qsys"]
+
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "amm_master_qsys.v"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/amm_master_qsys_rsp_xbar_demux.sv"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/altera_merlin_arbitrator.sv"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/amm_master_qsys_cmd_xbar_mux.sv"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/amm_master_qsys_cmd_xbar_demux.sv"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/altera_reset_controller.v"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/altera_reset_synchronizer.v"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/altera_reset_controller.sdc"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/amm_master_qsys_id_router.sv"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/amm_master_qsys_addr_router.sv"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/altera_avalon_sc_fifo.v"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/altera_merlin_slave_agent.sv"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/altera_merlin_burst_uncompressor.sv"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/altera_merlin_master_agent.sv"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/altera_merlin_slave_translator.sv"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/altera_merlin_master_translator.sv"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/custom_master.v"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/burst_write_master.v"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/burst_read_master.v"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/write_master.v"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/latency_aware_read_master.v"]
+set_global_assignment -library "lib_amm_master_qsys" -name MISC_FILE [file join $::quartus(sip_path) "submodules/amm_master_qsys_new_sdram_controller_0.v"]

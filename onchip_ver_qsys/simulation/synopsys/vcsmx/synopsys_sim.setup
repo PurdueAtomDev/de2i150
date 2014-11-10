@@ -1,0 +1,17 @@
+
+WORK > DEFAULT
+DEFAULT:                              ./libraries/work/                                
+work:                                 ./libraries/work/                                
+rst_controller:                       ./libraries/rst_controller/                      
+onchip_memory2_0_s1_translator:       ./libraries/onchip_memory2_0_s1_translator/      
+read_master_avalon_master_translator: ./libraries/read_master_avalon_master_translator/
+onchip_memory2_0:                     ./libraries/onchip_memory2_0/                    
+write_master:                         ./libraries/write_master/                        
+altera_ver:                           ./libraries/altera_ver/                          
+lpm_ver:                              ./libraries/lpm_ver/                             
+sgate_ver:                            ./libraries/sgate_ver/                           
+altera_mf_ver:                        ./libraries/altera_mf_ver/                       
+altera_lnsim_ver:                     ./libraries/altera_lnsim_ver/                    
+cycloneiv_hssi_ver:                   ./libraries/cycloneiv_hssi_ver/                  
+cycloneiv_pcie_hip_ver:               ./libraries/cycloneiv_pcie_hip_ver/              
+cycloneiv_ver:                        ./libraries/cycloneiv_ver/                       

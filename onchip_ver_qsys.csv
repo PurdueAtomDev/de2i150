@@ -1,0 +1,34 @@
+# system info onchip_ver_qsys on 2014.11.05.17:16:21
+system_info:
+name,value
+DEVICE,EP4CGX150DF31C7
+DEVICE_FAMILY,Cyclone IV GX
+GENERATION_ID,1415225774
+#
+#
+# Files generated for onchip_ver_qsys on 2014.11.05.17:16:21
+files:
+filepath,kind,attributes,module,is_top
+onchip_ver_qsys/simulation/onchip_ver_qsys.v,VERILOG,,onchip_ver_qsys,true
+onchip_ver_qsys/simulation/submodules/custom_master.v,VERILOG,,custom_master,false
+onchip_ver_qsys/simulation/submodules/burst_write_master.v,VERILOG,,custom_master,false
+onchip_ver_qsys/simulation/submodules/burst_read_master.v,VERILOG,,custom_master,false
+onchip_ver_qsys/simulation/submodules/write_master.v,VERILOG,,custom_master,false
+onchip_ver_qsys/simulation/submodules/latency_aware_read_master.v,VERILOG,,custom_master,false
+onchip_ver_qsys/simulation/submodules/onchip_ver_qsys_onchip_memory2_0.v,VERILOG,,onchip_ver_qsys_onchip_memory2_0,false
+onchip_ver_qsys/simulation/submodules/onchip_ver_qsys_onchip_memory2_0.hex,HEX,,onchip_ver_qsys_onchip_memory2_0,false
+onchip_ver_qsys/simulation/submodules/altera_merlin_master_translator.sv,SYSTEM_VERILOG,,altera_merlin_master_translator,false
+onchip_ver_qsys/simulation/submodules/altera_merlin_slave_translator.sv,SYSTEM_VERILOG,,altera_merlin_slave_translator,false
+onchip_ver_qsys/simulation/submodules/altera_reset_controller.v,VERILOG,,altera_reset_controller,false
+onchip_ver_qsys/simulation/submodules/altera_reset_synchronizer.v,VERILOG,,altera_reset_controller,false
+onchip_ver_qsys/simulation/submodules/altera_reset_controller.sdc,SDC,,altera_reset_controller,false
+#
+# Map from instance-path to kind of module
+instances:
+instancePath,module
+onchip_ver_qsys.write_master,custom_master
+onchip_ver_qsys.read_master,custom_master
+onchip_ver_qsys.onchip_memory2_0,onchip_ver_qsys_onchip_memory2_0
+onchip_ver_qsys.read_master_avalon_master_translator,altera_merlin_master_translator
+onchip_ver_qsys.onchip_memory2_0_s1_translator,altera_merlin_slave_translator
+onchip_ver_qsys.rst_controller,altera_reset_controller
