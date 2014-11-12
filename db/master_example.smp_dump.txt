@@ -1,4 +1,9 @@
 
+State Machine - |master_example|user_logic:user_logic_inst|wr_data
+Name wr_data.11011110101011011011111011101111 
+wr_data.11111110111011011111111011101101 0 
+wr_data.11011110101011011011111011101111 1 
+
 State Machine - |master_example|amm_master_qsys:amm_master_inst|amm_master_qsys_new_sdram_controller_0:new_sdram_controller_0|m_next
 Name m_next.010000000 m_next.000010000 m_next.000001000 m_next.000000001 
 m_next.000000001 0 0 0 0 

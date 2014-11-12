@@ -8,12 +8,11 @@ module user_logic #(
 	input logic reset,
 	//input logic write_n,
 	//input logic read_n,
-	input logic rdwr_cntl;
-
+	input logic rdwr_cntl,
+	input logic n_action,
 
 	input logic [ADDRESSWIDTH-1:0] read_address,
-	output logic [DATAWIDTH-1:0] read_data,
-
+	output logic[DATAWIDTH-1:0] display_data,
 	
 	// Control interface to write master
 	input  logic write_control_done,	 		   // Asserted and held when Master is done writing last word.Start next request on the next cycle.	
@@ -45,23 +44,24 @@ assign read_control_read_length = 4;
 
 
 logic [ADDRESSWIDTH-1:0] address, nextAddress;
-logic [DATAWIDTH-1:0] rd_data, wr_data,nextData;
-logic [DATAWIDTH-1:0] nextRead_data;
+logic [DATAWIDTH-1:0] rd_data, wr_data, nextData; 
+logic [DATAWIDTH-1:0] nextRead_data, read_data;
 typedef enum {IDLE, WRITE, WRITE_WAIT, READ_REQ, READ_WAIT, READ_ACK, READ_DATA} state_t;
 state_t state, nextState;
 
+assign display_data = (rdwr_cntl) ? wr_data : read_data ;
 
 always_ff @ (posedge clk) begin
 	if(!reset) begin
 		address <= 0;
 		state <= IDLE ;
-		wr_data <= 0;
+		wr_data <= 32'hfeedfeed;
 		read_data <= 32'hFEEDFEED; 
 	end else begin
 		state <= nextState;
-		//address <= nextAddress;
-		address <= 0;
+		address <= nextAddress;
 		wr_data <= nextData;
+		//wr_data <= 32'hdeadbeef;
 		read_data <= nextRead_data;
 	end
 end	
@@ -69,17 +69,23 @@ end
 // Next State Logic 
 always_comb begin
 	nextState = state;
-	nextAddress = read_address;
+	nextAddress = address;
 	nextData = wr_data;
 	nextRead_data = read_data;
 	case(state)
 		IDLE: begin //writes take priority
-			if(rdwr_cntl) begin
+			if(rdwr_cntl & !n_action) begin
 				nextState = WRITE;
 				nextAddress = address + BYTEENABLEWIDTH;
-				nextData = wr_data + 4 ;
-			end else if (!rdwr_cntl) begin 
+				//nextData = wr_data + 4 ;
+				if (wr_data == 32'hdeadbeef) begin
+					nextData = 32'hfeedfeed ;
+				end else begin 
+					nextData = 32'hdeadbeef;
+				end
+			end else if (!rdwr_cntl & !n_action) begin 
 				nextState = READ_REQ;
+				nextAddress = read_address ;// address - BYTEENABLEWIDTH;
 			end
 		end
 		WRITE: begin
@@ -100,11 +106,12 @@ always_comb begin
 		end
 		READ_ACK: begin
 			nextState = READ_DATA;
+			nextRead_data = read_user_buffer_output_data;
 
 		end
 		READ_DATA: begin
 			nextState = IDLE;
-			nextRead_data = read_user_buffer_output_data;
+		//	nextRead_data = read_user_buffer_output_data;
 		end
 		default: begin
 		end
@@ -127,19 +134,16 @@ always_comb begin
 			write_user_write_buffer = 1'b0;
 		end
 		WRITE: begin
-			//if (!write_user_buffer_full) begin
+			if (!write_user_buffer_full) begin
 			write_user_write_buffer = 1'b1;
 			write_control_go = 1'b1;		
 			write_control_write_base = address;
-			write_user_buffer_data = 32'h00001234;
-			//end 
-		end
-		WRITE_WAIT: begin
-			write_user_buffer_data = 32'hFFFFFFFF;
+			write_user_buffer_data = wr_data;
+			end 
 		end
 		READ_REQ: begin
 				read_control_go = 1'b1;
-				//read_control_read_base = address;
+				read_control_read_base = address;
 				
 				end
 		READ_ACK: begin
