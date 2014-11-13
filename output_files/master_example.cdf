@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP4CGX150DF31) Path("/home/ecegrid/a/mg287/Desktop/amm_master_example_v3_working/output_files/") File("master_example.sof") MfrSpec(OpMask(1));
+		Device PartName(EP4CGX150DF31) Path("/home/ecegrid/a/mg288/Desktop/de2i_150/amm_master_example/output_files/") File("master_example.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

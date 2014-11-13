@@ -12,7 +12,7 @@
 # or its authorized distributors. Please refer to the applicable 
 # agreement for further details.
 
-# ACDS 13.0sp1 232 linux 2014.11.03.12:21:14
+# ACDS 13.0sp1 232 linux 2014.11.13.18:27:01
 
 # ----------------------------------------
 # vcs - auto-generated simulation script
@@ -42,6 +42,9 @@ done
 
 # ----------------------------------------
 # copy RAM/ROM files to simulation directory
+if [ $SKIP_FILE_COPY -eq 0 ]; then
+  cp -f $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/amm_master_qsys_reconf_registers.hex ./
+fi
 
 vcs -lca -timescale=1ps/1ps -sverilog +verilog2001ext+.v -ntb_opts dtm $USER_DEFINED_ELAB_OPTIONS \
   -v $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_primitives.v \
@@ -52,26 +55,69 @@ vcs -lca -timescale=1ps/1ps -sverilog +verilog2001ext+.v -ntb_opts dtm $USER_DEF
   -v $QUARTUS_INSTALL_DIR/eda/sim_lib/cycloneiv_hssi_atoms.v \
   -v $QUARTUS_INSTALL_DIR/eda/sim_lib/cycloneiv_pcie_hip_atoms.v \
   -v $QUARTUS_INSTALL_DIR/eda/sim_lib/cycloneiv_atoms.v \
-  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/amm_master_qsys_rsp_xbar_demux.sv \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altpcie_pipe_interface.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altpcie_pcie_reconfig_bridge.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_pcie_hard_ip_reset_controller.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altpcie_rs_serdes.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altpcie_pll_100_250.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altpcie_pll_125_250.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/amm_master_qsys_pcie_hard_ip_0_altgx_internal.vo \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/synopsys/avalon_stif/altpciexpav_stif_a2p_addrtrans.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/synopsys/avalon_stif/altpciexpav_stif_a2p_fixtrans.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/synopsys/avalon_stif/altpciexpav_stif_a2p_vartrans.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/synopsys/avalon_stif/altpciexpav_stif_control_register.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/synopsys/avalon_stif/altpciexpav_stif_cr_avalon.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/synopsys/avalon_stif/altpciexpav_stif_cr_interrupt.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/synopsys/avalon_stif/altpciexpav_stif_cr_mailbox.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/synopsys/avalon_stif/altpciexpav_stif_p2a_addrtrans.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/synopsys/avalon_stif/altpciexpav_stif_reg_fifo.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/synopsys/avalon_stif/altpciexpav_stif_rx.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/synopsys/avalon_stif/altpciexpav_stif_rx_cntrl.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/synopsys/avalon_stif/altpciexpav_stif_rx_resp.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/synopsys/avalon_stif/altpciexpav_stif_tx.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/synopsys/avalon_stif/altpciexpav_stif_tx_cntrl.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/synopsys/avalon_stif/altpciexpav_stif_txavl_cntrl.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/synopsys/avalon_stif/altpciexpav_stif_txresp_cntrl.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/synopsys/avalon_stif/altpciexpav_clksync.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/synopsys/avalon_lite/altpciexpav_lite_app.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altpciexpav_stif_app.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altpcie_hip_pipen1b_qsys.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/amm_master_qsys_irq_mapper.sv \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_avalon_st_handshake_clock_crosser.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_avalon_st_clock_crosser.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_avalon_st_pipeline_base.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_merlin_width_adapter.sv \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_merlin_address_alignment.sv \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_merlin_burst_uncompressor.sv \
   $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_merlin_arbitrator.sv \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/amm_master_qsys_rsp_xbar_mux.sv \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/amm_master_qsys_rsp_xbar_demux.sv \
   $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/amm_master_qsys_cmd_xbar_mux.sv \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/amm_master_qsys_cmd_xbar_demux_001.sv \
   $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/amm_master_qsys_cmd_xbar_demux.sv \
   $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_reset_controller.v \
   $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_reset_synchronizer.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_merlin_burst_adapter.sv \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_merlin_traffic_limiter.sv \
   $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/amm_master_qsys_id_router.sv \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/amm_master_qsys_addr_router_002.sv \
   $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/amm_master_qsys_addr_router.sv \
   $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_avalon_sc_fifo.v \
   $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_merlin_slave_agent.sv \
-  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_merlin_burst_uncompressor.sv \
   $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_merlin_master_agent.sv \
   $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_merlin_slave_translator.sv \
   $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_merlin_master_translator.sv \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/amm_master_qsys_pcie_hard_ip_0.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/amm_master_qsys_reconf_registers.v \
   $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/custom_master.v \
   $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/burst_write_master.v \
   $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/burst_read_master.v \
   $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/write_master.v \
   $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/latency_aware_read_master.v \
-  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/amm_master_qsys_new_sdram_controller_0.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/amm_master_qsys_sdram_controller.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_pcie_bfm.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_pcie_bfm_components.v \
+  $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altpcietb_bfm_driver.v \
   $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/verbosity_pkg.sv \
   $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_avalon_reset_source.sv \
   $QSYS_SIMDIR/amm_master_qsys_tb/simulation/submodules/altera_avalon_clock_source.sv \

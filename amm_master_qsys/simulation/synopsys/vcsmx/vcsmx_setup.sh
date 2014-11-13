@@ -12,7 +12,7 @@
 # or its authorized distributors. Please refer to the applicable 
 # agreement for further details.
 
-# ACDS 13.0sp1 232 linux 2014.11.03.12:20:51
+# ACDS 13.0sp1 232 linux 2014.11.13.18:25:46
 
 # ----------------------------------------
 # vcsmx - auto-generated simulation script
@@ -46,19 +46,33 @@ done
 # ----------------------------------------
 # create compilation libraries
 mkdir -p ./libraries/work/
+mkdir -p ./libraries/pipe_interface_internal/
+mkdir -p ./libraries/reset_controller_internal/
+mkdir -p ./libraries/altgx_internal/
+mkdir -p ./libraries/pcie_internal_hip/
+mkdir -p ./libraries/irq_mapper/
+mkdir -p ./libraries/crosser/
+mkdir -p ./libraries/width_adapter/
+mkdir -p ./libraries/rsp_xbar_mux/
 mkdir -p ./libraries/rsp_xbar_demux/
 mkdir -p ./libraries/cmd_xbar_mux/
+mkdir -p ./libraries/cmd_xbar_demux_001/
 mkdir -p ./libraries/cmd_xbar_demux/
 mkdir -p ./libraries/rst_controller/
+mkdir -p ./libraries/burst_adapter/
+mkdir -p ./libraries/limiter/
 mkdir -p ./libraries/id_router/
+mkdir -p ./libraries/addr_router_002/
 mkdir -p ./libraries/addr_router/
-mkdir -p ./libraries/new_sdram_controller_0_s1_translator_avalon_universal_slave_0_agent_rsp_fifo/
-mkdir -p ./libraries/new_sdram_controller_0_s1_translator_avalon_universal_slave_0_agent/
+mkdir -p ./libraries/sdram_controller_s1_translator_avalon_universal_slave_0_agent_rsp_fifo/
+mkdir -p ./libraries/sdram_controller_s1_translator_avalon_universal_slave_0_agent/
 mkdir -p ./libraries/write_master_avalon_master_translator_avalon_universal_master_0_agent/
-mkdir -p ./libraries/new_sdram_controller_0_s1_translator/
+mkdir -p ./libraries/sdram_controller_s1_translator/
 mkdir -p ./libraries/write_master_avalon_master_translator/
+mkdir -p ./libraries/pcie_hard_ip_0/
+mkdir -p ./libraries/reconf_registers/
 mkdir -p ./libraries/write_master/
-mkdir -p ./libraries/new_sdram_controller_0/
+mkdir -p ./libraries/sdram_controller/
 mkdir -p ./libraries/altera_ver/
 mkdir -p ./libraries/lpm_ver/
 mkdir -p ./libraries/sgate_ver/
@@ -70,6 +84,9 @@ mkdir -p ./libraries/cycloneiv_ver/
 
 # ----------------------------------------
 # copy RAM/ROM files to simulation directory
+if [ $SKIP_FILE_COPY -eq 0 ]; then
+  cp -f $QSYS_SIMDIR/submodules/amm_master_qsys_reconf_registers.hex ./
+fi
 
 # ----------------------------------------
 # compile device library files
@@ -87,27 +104,71 @@ fi
 # ----------------------------------------
 # compile design files in correct order
 if [ $SKIP_COM -eq 0 ]; then
-  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/amm_master_qsys_rsp_xbar_demux.sv"        -work rsp_xbar_demux                                                              
-  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_arbitrator.sv"              -work cmd_xbar_mux                                                                
-  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/amm_master_qsys_cmd_xbar_mux.sv"          -work cmd_xbar_mux                                                                
-  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/amm_master_qsys_cmd_xbar_demux.sv"        -work cmd_xbar_demux                                                              
-  vlogan +v2k           "$QSYS_SIMDIR/submodules/altera_reset_controller.v"                -work rst_controller                                                              
-  vlogan +v2k           "$QSYS_SIMDIR/submodules/altera_reset_synchronizer.v"              -work rst_controller                                                              
-  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/amm_master_qsys_id_router.sv"             -work id_router                                                                   
-  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/amm_master_qsys_addr_router.sv"           -work addr_router                                                                 
-  vlogan +v2k           "$QSYS_SIMDIR/submodules/altera_avalon_sc_fifo.v"                  -work new_sdram_controller_0_s1_translator_avalon_universal_slave_0_agent_rsp_fifo
-  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_slave_agent.sv"             -work new_sdram_controller_0_s1_translator_avalon_universal_slave_0_agent         
-  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_burst_uncompressor.sv"      -work new_sdram_controller_0_s1_translator_avalon_universal_slave_0_agent         
-  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_master_agent.sv"            -work write_master_avalon_master_translator_avalon_universal_master_0_agent       
-  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_slave_translator.sv"        -work new_sdram_controller_0_s1_translator                                        
-  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_master_translator.sv"       -work write_master_avalon_master_translator                                       
-  vlogan +v2k           "$QSYS_SIMDIR/submodules/custom_master.v"                          -work write_master                                                                
-  vlogan +v2k           "$QSYS_SIMDIR/submodules/burst_write_master.v"                     -work write_master                                                                
-  vlogan +v2k           "$QSYS_SIMDIR/submodules/burst_read_master.v"                      -work write_master                                                                
-  vlogan +v2k           "$QSYS_SIMDIR/submodules/write_master.v"                           -work write_master                                                                
-  vlogan +v2k           "$QSYS_SIMDIR/submodules/latency_aware_read_master.v"              -work write_master                                                                
-  vlogan +v2k           "$QSYS_SIMDIR/submodules/amm_master_qsys_new_sdram_controller_0.v" -work new_sdram_controller_0                                                      
-  vlogan +v2k           "$QSYS_SIMDIR/amm_master_qsys.v"                                                                                                                     
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/altpcie_pipe_interface.v"                                 -work pipe_interface_internal                                               
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/altpcie_pcie_reconfig_bridge.v"                           -work pipe_interface_internal                                               
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/altera_pcie_hard_ip_reset_controller.v"                   -work reset_controller_internal                                             
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/altpcie_rs_serdes.v"                                      -work reset_controller_internal                                             
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/altpcie_pll_100_250.v"                                    -work reset_controller_internal                                             
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/altpcie_pll_125_250.v"                                    -work reset_controller_internal                                             
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/amm_master_qsys_pcie_hard_ip_0_altgx_internal.vo"         -work altgx_internal                                                        
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/synopsys/avalon_stif/altpciexpav_stif_a2p_addrtrans.v"    -work pcie_internal_hip                                                     
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/synopsys/avalon_stif/altpciexpav_stif_a2p_fixtrans.v"     -work pcie_internal_hip                                                     
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/synopsys/avalon_stif/altpciexpav_stif_a2p_vartrans.v"     -work pcie_internal_hip                                                     
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/synopsys/avalon_stif/altpciexpav_stif_control_register.v" -work pcie_internal_hip                                                     
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/synopsys/avalon_stif/altpciexpav_stif_cr_avalon.v"        -work pcie_internal_hip                                                     
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/synopsys/avalon_stif/altpciexpav_stif_cr_interrupt.v"     -work pcie_internal_hip                                                     
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/synopsys/avalon_stif/altpciexpav_stif_cr_mailbox.v"       -work pcie_internal_hip                                                     
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/synopsys/avalon_stif/altpciexpav_stif_p2a_addrtrans.v"    -work pcie_internal_hip                                                     
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/synopsys/avalon_stif/altpciexpav_stif_reg_fifo.v"         -work pcie_internal_hip                                                     
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/synopsys/avalon_stif/altpciexpav_stif_rx.v"               -work pcie_internal_hip                                                     
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/synopsys/avalon_stif/altpciexpav_stif_rx_cntrl.v"         -work pcie_internal_hip                                                     
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/synopsys/avalon_stif/altpciexpav_stif_rx_resp.v"          -work pcie_internal_hip                                                     
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/synopsys/avalon_stif/altpciexpav_stif_tx.v"               -work pcie_internal_hip                                                     
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/synopsys/avalon_stif/altpciexpav_stif_tx_cntrl.v"         -work pcie_internal_hip                                                     
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/synopsys/avalon_stif/altpciexpav_stif_txavl_cntrl.v"      -work pcie_internal_hip                                                     
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/synopsys/avalon_stif/altpciexpav_stif_txresp_cntrl.v"     -work pcie_internal_hip                                                     
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/synopsys/avalon_stif/altpciexpav_clksync.v"               -work pcie_internal_hip                                                     
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/synopsys/avalon_lite/altpciexpav_lite_app.v"              -work pcie_internal_hip                                                     
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/altpciexpav_stif_app.v"                                   -work pcie_internal_hip                                                     
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/altpcie_hip_pipen1b_qsys.v"                               -work pcie_internal_hip                                                     
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/amm_master_qsys_irq_mapper.sv"                            -work irq_mapper                                                            
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/altera_avalon_st_handshake_clock_crosser.v"               -work crosser                                                               
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/altera_avalon_st_clock_crosser.v"                         -work crosser                                                               
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_avalon_st_pipeline_base.v"                         -work crosser                                                               
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_width_adapter.sv"                           -work width_adapter                                                         
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_address_alignment.sv"                       -work width_adapter                                                         
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_burst_uncompressor.sv"                      -work width_adapter                                                         
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_arbitrator.sv"                              -work rsp_xbar_mux                                                          
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/amm_master_qsys_rsp_xbar_mux.sv"                          -work rsp_xbar_mux                                                          
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/amm_master_qsys_rsp_xbar_demux.sv"                        -work rsp_xbar_demux                                                        
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_arbitrator.sv"                              -work cmd_xbar_mux                                                          
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/amm_master_qsys_cmd_xbar_mux.sv"                          -work cmd_xbar_mux                                                          
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/amm_master_qsys_cmd_xbar_demux_001.sv"                    -work cmd_xbar_demux_001                                                    
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/amm_master_qsys_cmd_xbar_demux.sv"                        -work cmd_xbar_demux                                                        
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/altera_reset_controller.v"                                -work rst_controller                                                        
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/altera_reset_synchronizer.v"                              -work rst_controller                                                        
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_burst_adapter.sv"                           -work burst_adapter                                                         
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_address_alignment.sv"                       -work burst_adapter                                                         
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_traffic_limiter.sv"                         -work limiter                                                               
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_avalon_st_pipeline_base.v"                         -work limiter                                                               
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/amm_master_qsys_id_router.sv"                             -work id_router                                                             
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/amm_master_qsys_addr_router_002.sv"                       -work addr_router_002                                                       
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/amm_master_qsys_addr_router.sv"                           -work addr_router                                                           
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/altera_avalon_sc_fifo.v"                                  -work sdram_controller_s1_translator_avalon_universal_slave_0_agent_rsp_fifo
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_slave_agent.sv"                             -work sdram_controller_s1_translator_avalon_universal_slave_0_agent         
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_burst_uncompressor.sv"                      -work sdram_controller_s1_translator_avalon_universal_slave_0_agent         
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_master_agent.sv"                            -work write_master_avalon_master_translator_avalon_universal_master_0_agent 
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_slave_translator.sv"                        -work sdram_controller_s1_translator                                        
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_master_translator.sv"                       -work write_master_avalon_master_translator                                 
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/amm_master_qsys_pcie_hard_ip_0.v"                         -work pcie_hard_ip_0                                                        
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/amm_master_qsys_reconf_registers.v"                       -work reconf_registers                                                      
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/custom_master.v"                                          -work write_master                                                          
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/burst_write_master.v"                                     -work write_master                                                          
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/burst_read_master.v"                                      -work write_master                                                          
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/write_master.v"                                           -work write_master                                                          
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/latency_aware_read_master.v"                              -work write_master                                                          
+  vlogan +v2k           "$QSYS_SIMDIR/submodules/amm_master_qsys_sdram_controller.v"                       -work sdram_controller                                                      
+  vlogan +v2k           "$QSYS_SIMDIR/amm_master_qsys.v"                                                                                                                               
 fi
 
 # ----------------------------------------

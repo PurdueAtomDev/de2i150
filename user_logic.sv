@@ -1,5 +1,5 @@
 module user_logic #(
-	parameter ADDRESSWIDTH = 26 ,
+	parameter ADDRESSWIDTH = 27 ,
 	parameter DATAWIDTH = 32,
 	parameter BYTEENABLEWIDTH = 4
 )
@@ -10,7 +10,8 @@ module user_logic #(
 	//input logic read_n,
 	input logic rdwr_cntl,
 	input logic n_action,
-
+	output logic indicator,
+	input logic add_data_sel,
 	input logic [ADDRESSWIDTH-1:0] read_address,
 	output logic[DATAWIDTH-1:0] display_data,
 	
@@ -49,18 +50,27 @@ logic [DATAWIDTH-1:0] nextRead_data, read_data;
 typedef enum {IDLE, WRITE, WRITE_WAIT, READ_REQ, READ_WAIT, READ_ACK, READ_DATA} state_t;
 state_t state, nextState;
 
-assign display_data = (rdwr_cntl) ? wr_data : read_data ;
+assign display_data = add_data_sel ? address : ((rdwr_cntl) ? 0 : read_data) ;
+
+always_comb begin 
+	if ((address > 27'h04000000) & !rdwr_cntl) 
+		indicator = 1;
+	else 
+		indicator = 0;
+end
 
 always_ff @ (posedge clk) begin
 	if(!reset) begin
 		address <= 0;
 		state <= IDLE ;
-		wr_data <= 32'hfeedfeed;
+		wr_data <= 0;
 		read_data <= 32'hFEEDFEED; 
 	end else begin
 		state <= nextState;
-		address <= nextAddress;
-		wr_data <= nextData;
+		//address <= nextAddress;
+		address <= 27'h0400000f;
+		//wr_data <= nextData;
+		wr_data <= 32'hf00fbeeb;
 		//wr_data <= 32'hdeadbeef;
 		read_data <= nextRead_data;
 	end
@@ -77,15 +87,10 @@ always_comb begin
 			if(rdwr_cntl & !n_action) begin
 				nextState = WRITE;
 				nextAddress = address + BYTEENABLEWIDTH;
-				//nextData = wr_data + 4 ;
-				if (wr_data == 32'hdeadbeef) begin
-					nextData = 32'hfeedfeed ;
-				end else begin 
-					nextData = 32'hdeadbeef;
-				end
+				nextData = wr_data + 4 ;
 			end else if (!rdwr_cntl & !n_action) begin 
 				nextState = READ_REQ;
-				nextAddress = read_address ;// address - BYTEENABLEWIDTH;
+				nextAddress =  address - BYTEENABLEWIDTH;
 			end
 		end
 		WRITE: begin

@@ -77,7 +77,7 @@ Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage 
 -------------------------------------------------------------------------------------------------------------
 NC                           : A2        :        :                   :         :           :                
 ~ALTERA_DATA0~ / RESERVED_INPUT_WITH_WEAK_PULLUP : A3        : input  : 2.5 V             :         : 9         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : A4        :        :                   :         : 8         :                
+PCIE_PERST_N                 : A4        : input  : 2.5 V             :         : 8         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : A5        :        :                   :         : 8         :                
 HEX5[4]                      : A6        : output : 2.5 V             :         : 8         : Y              
 HEX5[3]                      : A7        : output : 2.5 V             :         : 8         : Y              
@@ -135,8 +135,8 @@ RESERVED_INPUT_WITH_WEAK_PULLUP : AA29      :        :                   :      
 RESERVED_INPUT_WITH_WEAK_PULLUP : AA30      :        :                   :         : 5         :                
 GND                          : AB1       : gnd    :                   :         :           :                
 GND                          : AB2       : gnd    :                   :         :           :                
-GXB_NC                       : AB3       :        :                   :         : QL0       :                
-GXB_NC                       : AB4       :        :                   :         : QL0       :                
+PCIE_TX_P(n)                 : AB3       : output : 1.5-V PCML        :         : QL0       : N              
+PCIE_TX_P                    : AB4       : output : 1.5-V PCML        :         : QL0       : N              
 GND                          : AB5       : gnd    :                   :         :           :                
 GND                          : AB6       : gnd    :                   :         :           :                
 GND                          : AB7       : gnd    :                   :         :           :                
@@ -163,8 +163,8 @@ RESERVED_INPUT_WITH_WEAK_PULLUP : AB27      :        :                   :      
 RESERVED_INPUT_WITH_WEAK_PULLUP : AB28      :        :                   :         : 5         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AB29      :        :                   :         : 5         :                
 SW[4]                        : AB30      : input  : 2.5 V             :         : 5         : Y              
-GXB_GND*                     : AC1       :        :                   :         : QL0       :                
-GXB_GND*                     : AC2       :        :                   :         : QL0       :                
+PCIE_RX_P(n)                 : AC1       : input  : 1.5-V PCML        :         : QL0       : N              
+PCIE_RX_P                    : AC2       : input  : 1.5-V PCML        :         : QL0       : N              
 GND                          : AC3       : gnd    :                   :         :           :                
 GND                          : AC4       : gnd    :                   :         :           :                
 GND                          : AC5       : gnd    :                   :         :           :                
@@ -459,7 +459,7 @@ RESERVED_INPUT_WITH_WEAK_PULLUP : C25       :        :                   :      
 RESERVED_INPUT_WITH_WEAK_PULLUP : C26       :        :                   :         : 7         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : C27       :        :                   :         : 7         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : C28       :        :                   :         : 7         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : C29       :        :                   :         : 6         :                
+PCIE_WAKE_N                  : C29       : output : 2.5 V             :         : 6         : Y              
 SW[16]                       : C30       : input  : 2.5 V             :         : 6         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : D1        :        :                   :         : 8         :                
 GND                          : D2        : gnd    :                   :         :           :                
@@ -491,8 +491,8 @@ RESERVED_INPUT_WITH_WEAK_PULLUP : D27       :        :                   :      
 RESERVED_INPUT_WITH_WEAK_PULLUP : D28       :        :                   :         : 7         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : D29       :        :                   :         : 6         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : D30       :        :                   :         : 6         :                
-TMS                          : E1        : input  :                   :         : 9         :                
-TDI                          : E2        : input  :                   :         : 9         :                
+altera_reserved_tms          : E1        : input  : 2.5 V             :         : 9         : N              
+altera_reserved_tdi          : E2        : input  : 2.5 V             :         : 9         : N              
 HEX3[4]                      : E3        : output : 2.5 V             :         : 8         : Y              
 HEX3[3]                      : E4        : output : 2.5 V             :         : 8         : Y              
 GND                          : E5        : gnd    :                   :         :           :                
@@ -521,8 +521,8 @@ RESERVED_INPUT_WITH_WEAK_PULLUP : E27       :        :                   :      
 RESERVED_INPUT_WITH_WEAK_PULLUP : E28       :        :                   :         : 6         :                
 GND                          : E29       : gnd    :                   :         :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : E30       :        :                   :         : 6         :                
-TDO                          : F1        : output :                   :         : 9         :                
-TCK                          : F2        : input  :                   :         : 9         :                
+altera_reserved_tdo          : F1        : output : 2.5 V             :         : 9         : N              
+altera_reserved_tck          : F2        : input  : 2.5 V             :         : 9         : N              
 GND                          : F3        : gnd    :                   :         :           :                
 HEX2[5]                      : F4        : output : 2.5 V             :         : 8         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : F5        :        :                   :         : 8         :                
@@ -895,7 +895,7 @@ GXB_GND*                     : V11       :        :                   :         
 GXB_GND*                     : V12       :        :                   :         : 3B        :                
 VCCINT                       : V13       : power  :                   : 1.2V    :           :                
 GND                          : V14       : gnd    :                   :         :           :                
-GXB_GND*                     : V15       :        :                   :         : 3A        :                
+PCIE_REFCLK_P                : V15       : input  : LVDS              :         : 3A        : Y              
 GND                          : V16       : gnd    :                   :         :           :                
 VCCINT                       : V17       : power  :                   : 1.2V    :           :                
 GND                          : V18       : gnd    :                   :         :           :                
@@ -925,7 +925,7 @@ GXB_GND*                     : W11       :        :                   :         
 GXB_GND*                     : W12       :        :                   :         : 3B        :                
 GND                          : W13       : gnd    :                   :         :           :                
 VCCINT                       : W14       : power  :                   : 1.2V    :           :                
-GXB_GND*                     : W15       :        :                   :         : 3A        :                
+PCIE_REFCLK_P(n)             : W15       : input  : LVDS              :         : 3A        : N              
 VCC_CLKIN3A                  : W16       : power  :                   : 2.5V    : 3A        :                
 GND                          : W17       : gnd    :                   :         :           :                
 VCCINT                       : W18       : power  :                   : 1.2V    :           :                

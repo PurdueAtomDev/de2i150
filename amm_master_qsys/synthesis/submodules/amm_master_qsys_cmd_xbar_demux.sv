@@ -28,9 +28,9 @@
 // ------------------------------------------
 // Generation parameters:
 //   output_name:         amm_master_qsys_cmd_xbar_demux
-//   ST_DATA_W:           93
-//   ST_CHANNEL_W:        2
-//   NUM_OUTPUTS:         1
+//   ST_DATA_W:           108
+//   ST_CHANNEL_W:        3
+//   NUM_OUTPUTS:         2
 //   VALID_WIDTH:         1
 // ------------------------------------------
 
@@ -46,8 +46,8 @@ module amm_master_qsys_cmd_xbar_demux
     // Sink
     // -------------------
     input  [1-1      : 0]   sink_valid,
-    input  [93-1    : 0]   sink_data, // ST_DATA_W=93
-    input  [2-1 : 0]   sink_channel, // ST_CHANNEL_W=2
+    input  [108-1    : 0]   sink_data, // ST_DATA_W=108
+    input  [3-1 : 0]   sink_channel, // ST_CHANNEL_W=3
     input                         sink_startofpacket,
     input                         sink_endofpacket,
     output                        sink_ready,
@@ -56,11 +56,18 @@ module amm_master_qsys_cmd_xbar_demux
     // Sources 
     // -------------------
     output reg                      src0_valid,
-    output reg [93-1    : 0] src0_data, // ST_DATA_W=93
-    output reg [2-1 : 0] src0_channel, // ST_CHANNEL_W=2
+    output reg [108-1    : 0] src0_data, // ST_DATA_W=108
+    output reg [3-1 : 0] src0_channel, // ST_CHANNEL_W=3
     output reg                      src0_startofpacket,
     output reg                      src0_endofpacket,
     input                           src0_ready,
+
+    output reg                      src1_valid,
+    output reg [108-1    : 0] src1_data, // ST_DATA_W=108
+    output reg [3-1 : 0] src1_channel, // ST_CHANNEL_W=3
+    output reg                      src1_startofpacket,
+    output reg                      src1_endofpacket,
+    input                           src1_ready,
 
 
     // -------------------
@@ -73,7 +80,7 @@ module amm_master_qsys_cmd_xbar_demux
 
 );
 
-    localparam NUM_OUTPUTS = 1;
+    localparam NUM_OUTPUTS = 2;
     wire [NUM_OUTPUTS - 1 : 0] ready_vector;
 
     // -------------------
@@ -87,12 +94,20 @@ module amm_master_qsys_cmd_xbar_demux
 
         src0_valid         = sink_channel[0] && sink_valid;
 
+        src1_data          = sink_data;
+        src1_startofpacket = sink_startofpacket;
+        src1_endofpacket   = sink_endofpacket;
+        src1_channel       = sink_channel >> NUM_OUTPUTS;
+
+        src1_valid         = sink_channel[1] && sink_valid;
+
     end
 
     // -------------------
     // Backpressure
     // -------------------
     assign ready_vector[0] = src0_ready;
+    assign ready_vector[1] = src1_ready;
 
     assign sink_ready = |(sink_channel & {{1{1'b0}},{ready_vector[NUM_OUTPUTS - 1 : 0]}});
 

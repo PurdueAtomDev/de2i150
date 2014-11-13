@@ -1,7 +1,37 @@
 module master_example ( 
-	CLOCK_50 , SW , KEY, LEDG, LEDR , DRAM_CLK, DRAM_CKE, DRAM_ADDR ,
-	DRAM_BA,  DRAM_CS_N , DRAM_CAS_N , DRAM_RAS_N, DRAM_WE_N, 
-	DRAM_DQ, DRAM_DQM , HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7);		
+				CLOCK_50 , 
+				SW , 
+				KEY, 
+				LEDG, 
+				LEDR , 
+				// DRAM signals
+				DRAM_CLK, 
+				DRAM_CKE, 
+				DRAM_ADDR ,
+				DRAM_BA ,
+				DRAM_CS_N ,
+				DRAM_CAS_N , 
+				DRAM_RAS_N , 
+				DRAM_WE_N, 
+				DRAM_DQ ,
+				DRAM_DQM ,
+				
+				// HEX 7 SEG DISPLAY
+				HEX0,
+				HEX1,
+				HEX2,
+				HEX3,
+				HEX4,
+				HEX5,
+				HEX6, 
+				HEX7,
+				// PCIE signals
+				PCIE_PERST_N,
+            			PCIE_REFCLK_P,
+            			PCIE_RX_P,
+            			PCIE_TX_P,
+            			PCIE_WAKE_N
+	);		
 	
 
 	input logic  CLOCK_50  ;
@@ -29,6 +59,11 @@ module master_example (
 	output logic DRAM_RAS_N;
 	output logic DRAM_WE_N;
 
+	input logic PCIE_PERST_N;
+	input logic PCIE_REFCLK_P;
+	input logic PCIE_RX_P;
+	output logic PCIE_TX_P;
+	output logic PCIE_WAKE_N;
 
 	//parameter ADDRESSWIDTH = 32 ;
 	parameter ADDRESSWIDTH = 8;
@@ -56,7 +91,7 @@ module master_example (
 	logic usr_rd_buffer;
 	logic [DATAWIDTH-1:0]usr_rd_buffer_data;
 	logic usr_rd_buffer_nonempty;
-//
+	logic indicator;
 	logic [31:0] display_data;
 /* 
 pll pll_inst(
@@ -66,6 +101,8 @@ pll pll_inst(
 	.c2( soc_clk) );
 */
 	
+	assign PCIE_WAKE_N = 1'b0;
+
 	assign soc_clk = CLOCK_50;
 	
 
@@ -93,6 +130,9 @@ pll pll_inst(
 			end
 			if (usr_wr_buffer_data == 32'hFFFFFFFF) begin
 				LEDG[5] <= 1;
+			end	
+			if ( indicator == 1) begin 
+				LEDG[3] <= 1;
 			end
 		end
 	end	
@@ -129,7 +169,13 @@ amm_master_qsys amm_master_inst  (
 		.read_master_control_done		(ctl_rd_done),				  //done
 		.read_master_user_read_buffer		(usr_rd_buffer),			  //read_master_user.read_buffer
 		.read_master_user_buffer_output_data	(usr_rd_buffer_data),			  //buffer_output_data
-		.read_master_user_data_available	(usr_rd_buffer_nonempty)		  //data_available
+		.read_master_user_data_available	(usr_rd_buffer_nonempty),		  //data_available
+
+		.pcie_hard_ip_0_refclk_export           (PCIE_REFCLK_P),                      // pcie_ip_refclk.export
+        	.pcie_hard_ip_0_pcie_rstn_export               (PCIE_PERST_N),             	  // pcie_ip_pcie_rstn.export
+        	.pcie_hard_ip_0_rx_in_rx_datain_0              (PCIE_RX_P),                          // pcie_ip_rx_in.rx_datain_0
+	        .pcie_hard_ip_0_tx_out_tx_dataout_0            (PCIE_TX_P)                           // pcie_ip_tx_out.tx_dataout_0
+
         );
 
 
@@ -138,6 +184,8 @@ user_logic user_logic_inst (
 	.reset(KEY[0]),
 	.rdwr_cntl(SW[17]),
 	.n_action(KEY[1]),
+	.indicator(indicator),
+	.add_data_sel(SW[16]),
 	.read_address(SW[7:0]),
 	.display_data(display_data),
 	.write_control_fixed_location(ctl_wr_fixed_location),
