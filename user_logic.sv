@@ -1,5 +1,5 @@
 module user_logic #(
-	parameter ADDRESSWIDTH = 27 ,
+	parameter ADDRESSWIDTH = 28 ,
 	parameter DATAWIDTH = 32,
 	parameter BYTEENABLEWIDTH = 4
 )
@@ -53,7 +53,7 @@ state_t state, nextState;
 assign display_data = add_data_sel ? address : ((rdwr_cntl) ? 0 : read_data) ;
 
 always_comb begin 
-	if ((address > 27'h04000000) & !rdwr_cntl) 
+	if ((address > 28'h00000000) & !rdwr_cntl) 
 		indicator = 1;
 	else 
 		indicator = 0;
@@ -68,7 +68,7 @@ always_ff @ (posedge clk) begin
 	end else begin
 		state <= nextState;
 		//address <= nextAddress;
-		address <= 27'h0400000f;
+		address <= 28'h00000004;
 		//wr_data <= nextData;
 		wr_data <= 32'hf00fbeeb;
 		//wr_data <= 32'hdeadbeef;

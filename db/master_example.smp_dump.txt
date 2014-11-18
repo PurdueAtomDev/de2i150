@@ -1,12 +1,94 @@
 
-State Machine - |master_example|amm_master_qsys:amm_master_inst|amm_master_qsys_pcie_hard_ip_0:pcie_hard_ip_0|altera_pcie_hard_ip_reset_controller:reset_controller_internal|altpcie_rs_serdes:altgx_reset|serdes_rst_state
+State Machine - |master_example|amm_master_qsys_with_pcie:amm_master_inst|altera_merlin_burst_adapter:burst_adapter_004|altera_merlin_burst_adapter_full:altera_merlin_burst_adapter_full.the_ba|state
+Name state.ST_IDLE state.ST_UNCOMP_WR_SUBBURST state.ST_UNCOMP_TRANS state.ST_COMP_TRANS 
+state.ST_IDLE 0 0 0 0 
+state.ST_COMP_TRANS 1 0 0 1 
+state.ST_UNCOMP_TRANS 1 0 1 0 
+state.ST_UNCOMP_WR_SUBBURST 1 1 0 0 
+
+State Machine - |master_example|amm_master_qsys_with_pcie:amm_master_inst|altera_merlin_burst_adapter:burst_adapter_003|altera_merlin_burst_adapter_full:altera_merlin_burst_adapter_full.the_ba|state
+Name state.ST_IDLE state.ST_UNCOMP_WR_SUBBURST state.ST_UNCOMP_TRANS state.ST_COMP_TRANS 
+state.ST_IDLE 0 0 0 0 
+state.ST_COMP_TRANS 1 0 0 1 
+state.ST_UNCOMP_TRANS 1 0 1 0 
+state.ST_UNCOMP_WR_SUBBURST 1 1 0 0 
+
+State Machine - |master_example|amm_master_qsys_with_pcie:amm_master_inst|altera_merlin_burst_adapter:burst_adapter_002|altera_merlin_burst_adapter_full:altera_merlin_burst_adapter_full.the_ba|state
+Name state.ST_IDLE state.ST_UNCOMP_WR_SUBBURST state.ST_UNCOMP_TRANS state.ST_COMP_TRANS 
+state.ST_IDLE 0 0 0 0 
+state.ST_COMP_TRANS 1 0 0 1 
+state.ST_UNCOMP_TRANS 1 0 1 0 
+state.ST_UNCOMP_WR_SUBBURST 1 1 0 0 
+
+State Machine - |master_example|amm_master_qsys_with_pcie:amm_master_inst|altera_merlin_burst_adapter:burst_adapter_001|altera_merlin_burst_adapter_full:altera_merlin_burst_adapter_full.the_ba|state
+Name state.ST_IDLE state.ST_UNCOMP_WR_SUBBURST state.ST_UNCOMP_TRANS state.ST_COMP_TRANS 
+state.ST_IDLE 0 0 0 0 
+state.ST_COMP_TRANS 1 0 0 1 
+state.ST_UNCOMP_TRANS 1 0 1 0 
+state.ST_UNCOMP_WR_SUBBURST 1 1 0 0 
+
+State Machine - |master_example|amm_master_qsys_with_pcie:amm_master_inst|altera_merlin_burst_adapter:burst_adapter|altera_merlin_burst_adapter_full:altera_merlin_burst_adapter_full.the_ba|state
+Name state.ST_IDLE state.ST_UNCOMP_WR_SUBBURST state.ST_UNCOMP_TRANS state.ST_COMP_TRANS 
+state.ST_IDLE 0 0 0 0 
+state.ST_COMP_TRANS 1 0 0 1 
+state.ST_UNCOMP_TRANS 1 0 1 0 
+state.ST_UNCOMP_WR_SUBBURST 1 1 0 0 
+
+State Machine - |master_example|amm_master_qsys_with_pcie:amm_master_inst|amm_master_qsys_with_pcie_sdram:sdram|m_next
+Name m_next.010000000 m_next.000010000 m_next.000001000 m_next.000000001 
+m_next.000000001 0 0 0 0 
+m_next.000001000 0 0 1 1 
+m_next.000010000 0 1 0 1 
+m_next.010000000 1 0 0 1 
+
+State Machine - |master_example|amm_master_qsys_with_pcie:amm_master_inst|amm_master_qsys_with_pcie_sdram:sdram|m_state
+Name m_state.100000000 m_state.010000000 m_state.001000000 m_state.000100000 m_state.000010000 m_state.000001000 m_state.000000100 m_state.000000010 m_state.000000001 
+m_state.000000001 0 0 0 0 0 0 0 0 0 
+m_state.000000010 0 0 0 0 0 0 0 1 1 
+m_state.000000100 0 0 0 0 0 0 1 0 1 
+m_state.000001000 0 0 0 0 0 1 0 0 1 
+m_state.000010000 0 0 0 0 1 0 0 0 1 
+m_state.000100000 0 0 0 1 0 0 0 0 1 
+m_state.001000000 0 0 1 0 0 0 0 0 1 
+m_state.010000000 0 1 0 0 0 0 0 0 1 
+m_state.100000000 1 0 0 0 0 0 0 0 1 
+
+State Machine - |master_example|amm_master_qsys_with_pcie:amm_master_inst|amm_master_qsys_with_pcie_sdram:sdram|i_next
+Name i_next.111 i_next.101 i_next.010 i_next.000 
+i_next.000 0 0 0 0 
+i_next.010 0 0 1 1 
+i_next.101 0 1 0 1 
+i_next.111 1 0 0 1 
+
+State Machine - |master_example|amm_master_qsys_with_pcie:amm_master_inst|amm_master_qsys_with_pcie_sdram:sdram|i_state
+Name i_state.111 i_state.101 i_state.011 i_state.010 i_state.001 i_state.000 
+i_state.000 0 0 0 0 0 0 
+i_state.001 0 0 0 0 1 1 
+i_state.010 0 0 0 1 0 1 
+i_state.011 0 0 1 0 0 1 
+i_state.101 0 1 0 0 0 1 
+i_state.111 1 0 0 0 0 1 
+
+State Machine - |master_example|amm_master_qsys_with_pcie:amm_master_inst|amm_master_qsys_with_pcie_sgdma:sgdma|amm_master_qsys_with_pcie_sgdma_desc_address_fifo:the_amm_master_qsys_with_pcie_sgdma_desc_address_fifo|scfifo:amm_master_qsys_with_pcie_sgdma_desc_address_fifo_desc_address_fifo|a_fffifo:subfifo|a_fefifo:fifo_state|sm_emptyfull
+Name state_middle state_full state_empty 
+state_empty 0 0 0 
+state_middle 1 0 1 
+state_full 0 1 1 
+
+State Machine - |master_example|amm_master_qsys_with_pcie:amm_master_inst|amm_master_qsys_with_pcie_sgdma:sgdma|amm_master_qsys_with_pcie_sgdma_chain:the_amm_master_qsys_with_pcie_sgdma_chain|descriptor_read_which_resides_within_amm_master_qsys_with_pcie_sgdma:the_descriptor_read_which_resides_within_amm_master_qsys_with_pcie_sgdma|descriptor_read_which_resides_within_amm_master_qsys_with_pcie_sgdma_control_bits_fifo:the_descriptor_read_which_resides_within_amm_master_qsys_with_pcie_sgdma_control_bits_fifo|scfifo:descriptor_read_which_resides_within_amm_master_qsys_with_pcie_sgdma_control_bits_fifo_controlbitsfifo|a_fffifo:subfifo|a_fefifo:fifo_state|sm_emptyfull
+Name state_middle state_full state_empty 
+state_empty 0 0 0 
+state_middle 1 0 1 
+state_full 0 1 1 
+
+State Machine - |master_example|amm_master_qsys_with_pcie:amm_master_inst|amm_master_qsys_with_pcie_pcie_ip:pcie_ip|altera_pcie_hard_ip_reset_controller:reset_controller_internal|altpcie_rs_serdes:altgx_reset|serdes_rst_state
 Name serdes_rst_state~5 serdes_rst_state~4 
 serdes_rst_state.STROBE_TXPLL_LOCKED_SD_CNT 0 0 
 serdes_rst_state.IDLE_ST_CNT 0 1 
 serdes_rst_state.STABLE_TX_PLL_ST_CNT 1 0 
 serdes_rst_state.WAIT_STATE_ST_CNT 1 1 
 
-State Machine - |master_example|amm_master_qsys:amm_master_inst|amm_master_qsys_pcie_hard_ip_0:pcie_hard_ip_0|altpcie_hip_pipen1b_qsys:pcie_internal_hip|altpciexpav_stif_app:avalon_stream_hip_qsys.avalon_bridge|altpciexpav_stif_control_register:cntrl_reg|altpciexpav_stif_cr_avalon:i_avalon|avalon_state_reg
+State Machine - |master_example|amm_master_qsys_with_pcie:amm_master_inst|amm_master_qsys_with_pcie_pcie_ip:pcie_ip|altpcie_hip_pipen1b_qsys:pcie_internal_hip|altpciexpav_stif_app:avalon_stream_hip_qsys.avalon_bridge|altpciexpav_stif_control_register:cntrl_reg|altpciexpav_stif_cr_avalon:i_avalon|avalon_state_reg
 Name avalon_state_reg.CRA_PIPE avalon_state_reg.CRA_READ_ACK avalon_state_reg.CRA_READ_WAIT avalon_state_reg.CRA_READ_FIRST avalon_state_reg.CRA_WRITE_ACK avalon_state_reg.CRA_IDLE 
 avalon_state_reg.CRA_IDLE 0 0 0 0 0 0 
 avalon_state_reg.CRA_WRITE_ACK 0 0 0 0 1 1 
@@ -15,14 +97,14 @@ avalon_state_reg.CRA_READ_WAIT 0 0 1 0 0 1
 avalon_state_reg.CRA_READ_ACK 0 1 0 0 0 1 
 avalon_state_reg.CRA_PIPE 1 0 0 0 0 1 
 
-State Machine - |master_example|amm_master_qsys:amm_master_inst|amm_master_qsys_pcie_hard_ip_0:pcie_hard_ip_0|altpcie_hip_pipen1b_qsys:pcie_internal_hip|altpcie_pcie_reconfig_bridge:altpcie_pcie_reconfig_bridge0|mdio_cycle
+State Machine - |master_example|amm_master_qsys_with_pcie:amm_master_inst|amm_master_qsys_with_pcie_pcie_ip:pcie_ip|altpcie_hip_pipen1b_qsys:pcie_internal_hip|altpcie_pcie_reconfig_bridge:altpcie_pcie_reconfig_bridge0|mdio_cycle
 Name mdio_cycle.MDIO_END mdio_cycle.MDIO_READ mdio_cycle.MDIO_WRITE mdio_cycle.MDIO_ADDR 
 mdio_cycle.MDIO_ADDR 0 0 0 0 
 mdio_cycle.MDIO_WRITE 0 0 1 1 
 mdio_cycle.MDIO_READ 0 1 0 1 
 mdio_cycle.MDIO_END 1 0 0 1 
 
-State Machine - |master_example|amm_master_qsys:amm_master_inst|amm_master_qsys_pcie_hard_ip_0:pcie_hard_ip_0|altpcie_hip_pipen1b_qsys:pcie_internal_hip|altpcie_pcie_reconfig_bridge:altpcie_pcie_reconfig_bridge0|cstate
+State Machine - |master_example|amm_master_qsys_with_pcie:amm_master_inst|amm_master_qsys_with_pcie_pcie_ip:pcie_ip|altpcie_hip_pipen1b_qsys:pcie_internal_hip|altpcie_pcie_reconfig_bridge:altpcie_pcie_reconfig_bridge0|cstate
 Name cstate.CLEAR_WAITREQ_ST cstate.MDIO_FRAME_ST cstate.MDIO_PRE_ST cstate.MDIO_CLR_ST cstate.ERR_ST cstate.CTRL_RD_ST cstate.CTRL_WR_ST cstate.MDIO_START_ST cstate.CHECK_ADDR_ST cstate.IDLE_ST 
 cstate.IDLE_ST 0 0 0 0 0 0 0 0 0 0 
 cstate.CHECK_ADDR_ST 0 0 0 0 0 0 0 0 1 1 
@@ -35,44 +117,9 @@ cstate.MDIO_PRE_ST 0 0 1 0 0 0 0 0 0 1
 cstate.MDIO_FRAME_ST 0 1 0 0 0 0 0 0 0 1 
 cstate.CLEAR_WAITREQ_ST 1 0 0 0 0 0 0 0 0 1 
 
-State Machine - |master_example|amm_master_qsys:amm_master_inst|amm_master_qsys_pcie_hard_ip_0:pcie_hard_ip_0|altpcie_hip_pipen1b_qsys:pcie_internal_hip|alt4gxb_reset_controller:g_reset_controller.alt4gxb_reset_controller0|rst_ctrl_sm
+State Machine - |master_example|amm_master_qsys_with_pcie:amm_master_inst|amm_master_qsys_with_pcie_pcie_ip:pcie_ip|altpcie_hip_pipen1b_qsys:pcie_internal_hip|alt4gxb_reset_controller:g_reset_controller.alt4gxb_reset_controller0|rst_ctrl_sm
 Name rst_ctrl_sm~5 rst_ctrl_sm~4 
 rst_ctrl_sm.strobe_txpll_locked 0 0 
 rst_ctrl_sm.idle 0 1 
 rst_ctrl_sm.stable_tx_pll 1 1 
 rst_ctrl_sm.wait_state 1 0 
-
-State Machine - |master_example|amm_master_qsys:amm_master_inst|amm_master_qsys_sdram_controller:sdram_controller|m_next
-Name m_next.010000000 m_next.000010000 m_next.000001000 m_next.000000001 
-m_next.000000001 0 0 0 0 
-m_next.000001000 0 0 1 1 
-m_next.000010000 0 1 0 1 
-m_next.010000000 1 0 0 1 
-
-State Machine - |master_example|amm_master_qsys:amm_master_inst|amm_master_qsys_sdram_controller:sdram_controller|m_state
-Name m_state.100000000 m_state.010000000 m_state.001000000 m_state.000100000 m_state.000010000 m_state.000001000 m_state.000000100 m_state.000000010 m_state.000000001 
-m_state.000000001 0 0 0 0 0 0 0 0 0 
-m_state.000000010 0 0 0 0 0 0 0 1 1 
-m_state.000000100 0 0 0 0 0 0 1 0 1 
-m_state.000001000 0 0 0 0 0 1 0 0 1 
-m_state.000010000 0 0 0 0 1 0 0 0 1 
-m_state.000100000 0 0 0 1 0 0 0 0 1 
-m_state.001000000 0 0 1 0 0 0 0 0 1 
-m_state.010000000 0 1 0 0 0 0 0 0 1 
-m_state.100000000 1 0 0 0 0 0 0 0 1 
-
-State Machine - |master_example|amm_master_qsys:amm_master_inst|amm_master_qsys_sdram_controller:sdram_controller|i_next
-Name i_next.111 i_next.101 i_next.010 i_next.000 
-i_next.000 0 0 0 0 
-i_next.010 0 0 1 1 
-i_next.101 0 1 0 1 
-i_next.111 1 0 0 1 
-
-State Machine - |master_example|amm_master_qsys:amm_master_inst|amm_master_qsys_sdram_controller:sdram_controller|i_state
-Name i_state.111 i_state.101 i_state.011 i_state.010 i_state.001 i_state.000 
-i_state.000 0 0 0 0 0 0 
-i_state.001 0 0 0 0 1 1 
-i_state.010 0 0 0 1 0 1 
-i_state.011 0 0 1 0 0 1 
-i_state.101 0 1 0 0 0 1 
-i_state.111 1 0 0 0 0 1 
