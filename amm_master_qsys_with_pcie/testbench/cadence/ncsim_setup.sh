@@ -12,7 +12,7 @@
 # or its authorized distributors. Please refer to the applicable 
 # agreement for further details.
 
-# ACDS 13.0sp1 232 linux 2014.11.18.14:07:58
+# ACDS 13.0sp1 232 linux 2014.11.18.17:01:40
 
 # ----------------------------------------
 # ncsim - auto-generated simulation script
@@ -51,7 +51,7 @@ mkdir -p ./libraries/reset_controller_internal/
 mkdir -p ./libraries/altgx_internal/
 mkdir -p ./libraries/pcie_internal_hip/
 mkdir -p ./libraries/irq_mapper/
-mkdir -p ./libraries/async_fifo/
+mkdir -p ./libraries/crosser/
 mkdir -p ./libraries/width_adapter/
 mkdir -p ./libraries/rsp_xbar_mux_005/
 mkdir -p ./libraries/rsp_xbar_mux_003/
@@ -156,8 +156,9 @@ if [ $SKIP_COM -eq 0 ]; then
   ncvlog     "$QSYS_SIMDIR/amm_master_qsys_with_pcie_tb/simulation/submodules/altpciexpav_stif_app.v"                                  -work pcie_internal_hip                                            -cdslib ./cds_libs/pcie_internal_hip.cds.lib                                           
   ncvlog     "$QSYS_SIMDIR/amm_master_qsys_with_pcie_tb/simulation/submodules/altpcie_hip_pipen1b_qsys.v"                              -work pcie_internal_hip                                            -cdslib ./cds_libs/pcie_internal_hip.cds.lib                                           
   ncvlog -sv "$QSYS_SIMDIR/amm_master_qsys_with_pcie_tb/simulation/submodules/amm_master_qsys_with_pcie_irq_mapper.sv"                 -work irq_mapper                                                   -cdslib ./cds_libs/irq_mapper.cds.lib                                                  
-  ncvlog     "$QSYS_SIMDIR/amm_master_qsys_with_pcie_tb/simulation/submodules/altera_avalon_dc_fifo.v"                                 -work async_fifo                                                   -cdslib ./cds_libs/async_fifo.cds.lib                                                  
-  ncvlog     "$QSYS_SIMDIR/amm_master_qsys_with_pcie_tb/simulation/submodules/altera_dcfifo_synchronizer_bundle.v"                     -work async_fifo                                                   -cdslib ./cds_libs/async_fifo.cds.lib                                                  
+  ncvlog     "$QSYS_SIMDIR/amm_master_qsys_with_pcie_tb/simulation/submodules/altera_avalon_st_handshake_clock_crosser.v"              -work crosser                                                      -cdslib ./cds_libs/crosser.cds.lib                                                     
+  ncvlog     "$QSYS_SIMDIR/amm_master_qsys_with_pcie_tb/simulation/submodules/altera_avalon_st_clock_crosser.v"                        -work crosser                                                      -cdslib ./cds_libs/crosser.cds.lib                                                     
+  ncvlog -sv "$QSYS_SIMDIR/amm_master_qsys_with_pcie_tb/simulation/submodules/altera_avalon_st_pipeline_base.v"                        -work crosser                                                      -cdslib ./cds_libs/crosser.cds.lib                                                     
   ncvlog -sv "$QSYS_SIMDIR/amm_master_qsys_with_pcie_tb/simulation/submodules/altera_merlin_width_adapter.sv"                          -work width_adapter                                                -cdslib ./cds_libs/width_adapter.cds.lib                                               
   ncvlog -sv "$QSYS_SIMDIR/amm_master_qsys_with_pcie_tb/simulation/submodules/altera_merlin_address_alignment.sv"                      -work width_adapter                                                -cdslib ./cds_libs/width_adapter.cds.lib                                               
   ncvlog -sv "$QSYS_SIMDIR/amm_master_qsys_with_pcie_tb/simulation/submodules/altera_merlin_burst_uncompressor.sv"                     -work width_adapter                                                -cdslib ./cds_libs/width_adapter.cds.lib                                               

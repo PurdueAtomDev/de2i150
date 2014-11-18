@@ -14,7 +14,7 @@ DEFINE reset_controller_internal                                    ./libraries/
 DEFINE altgx_internal                                               ./libraries/altgx_internal/                                              
 DEFINE pcie_internal_hip                                            ./libraries/pcie_internal_hip/                                           
 DEFINE irq_mapper                                                   ./libraries/irq_mapper/                                                  
-DEFINE async_fifo                                                   ./libraries/async_fifo/                                                  
+DEFINE crosser                                                      ./libraries/crosser/                                                     
 DEFINE width_adapter                                                ./libraries/width_adapter/                                               
 DEFINE rsp_xbar_mux_005                                             ./libraries/rsp_xbar_mux_005/                                            
 DEFINE rsp_xbar_mux_003                                             ./libraries/rsp_xbar_mux_003/                                            

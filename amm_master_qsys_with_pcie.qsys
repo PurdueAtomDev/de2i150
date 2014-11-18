@@ -192,7 +192,7 @@
    }
 }
 ]]></parameter>
- <parameter name="clockCrossingAdapter" value="AUTO" />
+ <parameter name="clockCrossingAdapter" value="HANDSHAKE" />
  <parameter name="device" value="EP4CGX150DF31C7" />
  <parameter name="deviceFamily" value="Cyclone IV GX" />
  <parameter name="deviceSpeedGrade" value="7" />
@@ -205,7 +205,7 @@
  <parameter name="projectName" value="master_example.qpf" />
  <parameter name="sopcBorderPoints" value="false" />
  <parameter name="systemHash" value="1" />
- <parameter name="timeStamp" value="1416328705035" />
+ <parameter name="timeStamp" value="1416346854718" />
  <parameter name="useTestBenchNamingPattern" value="false" />
  <instanceScript></instanceScript>
  <interface name="clk" internal="clk_50.clk_in" type="clock" dir="end" />
@@ -820,46 +820,10 @@
    start="pcie_ip.pcie_core_reset"
    end="read_master.clock_reset_reset" />
  <connection
-   kind="avalon"
-   version="13.0"
-   start="read_master.avalon_master"
-   end="reconf_registers.s1">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0000" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="13.0"
-   start="read_master.avalon_master"
-   end="sdram.s1">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x08000000" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
    kind="reset"
    version="13.0"
    start="pcie_ip.pcie_core_reset"
    end="write_master.clock_reset_reset" />
- <connection
-   kind="avalon"
-   version="13.0"
-   start="write_master.avalon_master"
-   end="reconf_registers.s1">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0000" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="13.0"
-   start="write_master.avalon_master"
-   end="sdram.s1">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x08000000" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
  <connection
    kind="reset"
    version="13.0"
@@ -886,6 +850,42 @@
    start="clk_50.clk"
    end="reconf_registers.clk1" />
  <connection kind="clock" version="13.0" start="clk_50.clk" end="sdram.clk" />
- <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="AUTO" />
+ <connection
+   kind="avalon"
+   version="13.0"
+   start="write_master.avalon_master"
+   end="reconf_registers.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="13.0"
+   start="read_master.avalon_master"
+   end="reconf_registers.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="13.0"
+   start="read_master.avalon_master"
+   end="sdram.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x08000000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="13.0"
+   start="write_master.avalon_master"
+   end="sdram.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x08000000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="1" />
 </system>

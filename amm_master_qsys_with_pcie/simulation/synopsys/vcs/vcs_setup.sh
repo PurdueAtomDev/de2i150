@@ -12,7 +12,7 @@
 # or its authorized distributors. Please refer to the applicable 
 # agreement for further details.
 
-# ACDS 13.0sp1 232 linux 2014.11.18.14:06:36
+# ACDS 13.0sp1 232 linux 2014.11.18.17:00:16
 
 # ----------------------------------------
 # vcs - auto-generated simulation script
@@ -83,8 +83,9 @@ vcs -lca -timescale=1ps/1ps -sverilog +verilog2001ext+.v -ntb_opts dtm $USER_DEF
   $QSYS_SIMDIR/submodules/altpciexpav_stif_app.v \
   $QSYS_SIMDIR/submodules/altpcie_hip_pipen1b_qsys.v \
   $QSYS_SIMDIR/submodules/amm_master_qsys_with_pcie_irq_mapper.sv \
-  $QSYS_SIMDIR/submodules/altera_avalon_dc_fifo.v \
-  $QSYS_SIMDIR/submodules/altera_dcfifo_synchronizer_bundle.v \
+  $QSYS_SIMDIR/submodules/altera_avalon_st_handshake_clock_crosser.v \
+  $QSYS_SIMDIR/submodules/altera_avalon_st_clock_crosser.v \
+  $QSYS_SIMDIR/submodules/altera_avalon_st_pipeline_base.v \
   $QSYS_SIMDIR/submodules/altera_merlin_width_adapter.sv \
   $QSYS_SIMDIR/submodules/altera_merlin_address_alignment.sv \
   $QSYS_SIMDIR/submodules/altera_merlin_burst_uncompressor.sv \
@@ -110,7 +111,6 @@ vcs -lca -timescale=1ps/1ps -sverilog +verilog2001ext+.v -ntb_opts dtm $USER_DEF
   $QSYS_SIMDIR/submodules/altera_reset_synchronizer.v \
   $QSYS_SIMDIR/submodules/altera_merlin_burst_adapter.sv \
   $QSYS_SIMDIR/submodules/altera_merlin_traffic_limiter.sv \
-  $QSYS_SIMDIR/submodules/altera_avalon_st_pipeline_base.v \
   $QSYS_SIMDIR/submodules/amm_master_qsys_with_pcie_id_router_004.sv \
   $QSYS_SIMDIR/submodules/amm_master_qsys_with_pcie_id_router_003.sv \
   $QSYS_SIMDIR/submodules/amm_master_qsys_with_pcie_id_router_002.sv \

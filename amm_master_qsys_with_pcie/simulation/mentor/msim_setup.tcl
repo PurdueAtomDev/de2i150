@@ -12,7 +12,7 @@
 # or its authorized distributors. Please refer to the applicable 
 # agreement for further details.
 
-# ACDS 13.0sp1 232 linux 2014.11.18.14:06:36
+# ACDS 13.0sp1 232 linux 2014.11.18.17:00:16
 
 # ----------------------------------------
 # Auto-generated simulation script
@@ -80,8 +80,8 @@ ensure_lib                                                              ./librar
 vmap       pcie_internal_hip                                            ./libraries/pcie_internal_hip/                                           
 ensure_lib                                                              ./libraries/irq_mapper/                                                  
 vmap       irq_mapper                                                   ./libraries/irq_mapper/                                                  
-ensure_lib                                                              ./libraries/async_fifo/                                                  
-vmap       async_fifo                                                   ./libraries/async_fifo/                                                  
+ensure_lib                                                              ./libraries/crosser/                                                     
+vmap       crosser                                                      ./libraries/crosser/                                                     
 ensure_lib                                                              ./libraries/width_adapter/                                               
 vmap       width_adapter                                                ./libraries/width_adapter/                                               
 ensure_lib                                                              ./libraries/rsp_xbar_mux_005/                                            
@@ -213,8 +213,9 @@ alias com {
   vlog     "$QSYS_SIMDIR/submodules/altpciexpav_stif_app.v"                                 -work pcie_internal_hip                                           
   vlog     "$QSYS_SIMDIR/submodules/altpcie_hip_pipen1b_qsys.v"                             -work pcie_internal_hip                                           
   vlog -sv "$QSYS_SIMDIR/submodules/amm_master_qsys_with_pcie_irq_mapper.sv"                -work irq_mapper                                                  
-  vlog     "$QSYS_SIMDIR/submodules/altera_avalon_dc_fifo.v"                                -work async_fifo                                                  
-  vlog     "$QSYS_SIMDIR/submodules/altera_dcfifo_synchronizer_bundle.v"                    -work async_fifo                                                  
+  vlog     "$QSYS_SIMDIR/submodules/altera_avalon_st_handshake_clock_crosser.v"             -work crosser                                                     
+  vlog     "$QSYS_SIMDIR/submodules/altera_avalon_st_clock_crosser.v"                       -work crosser                                                     
+  vlog -sv "$QSYS_SIMDIR/submodules/altera_avalon_st_pipeline_base.v"                       -work crosser                                                     
   vlog -sv "$QSYS_SIMDIR/submodules/altera_merlin_width_adapter.sv"                         -work width_adapter                                               
   vlog -sv "$QSYS_SIMDIR/submodules/altera_merlin_address_alignment.sv"                     -work width_adapter                                               
   vlog -sv "$QSYS_SIMDIR/submodules/altera_merlin_burst_uncompressor.sv"                    -work width_adapter                                               
@@ -279,14 +280,14 @@ alias com {
 # Elaborate top level design
 alias elab {
   echo "\[exec\] elab"
-  vsim -t ps -L work -L work_lib -L pipe_interface_internal -L reset_controller_internal -L altgx_internal -L pcie_internal_hip -L irq_mapper -L async_fifo -L width_adapter -L rsp_xbar_mux_005 -L rsp_xbar_mux_003 -L rsp_xbar_demux_004 -L rsp_xbar_demux_003 -L rsp_xbar_demux_002 -L cmd_xbar_mux_004 -L cmd_xbar_mux_003 -L cmd_xbar_mux_002 -L cmd_xbar_demux_007 -L cmd_xbar_demux_006 -L cmd_xbar_demux_005 -L cmd_xbar_demux_004 -L cmd_xbar_demux_003 -L cmd_xbar_demux_001 -L rsp_xbar_mux -L rsp_xbar_demux -L cmd_xbar_demux -L rst_controller -L burst_adapter -L limiter -L id_router_004 -L id_router_003 -L id_router_002 -L addr_router_006 -L addr_router_005 -L addr_router_003 -L addr_router_001 -L id_router -L addr_router -L sgdma_csr_translator_avalon_universal_slave_0_agent_rsp_fifo -L sgdma_csr_translator_avalon_universal_slave_0_agent -L pcie_ip_bar2_translator_avalon_universal_master_0_agent -L sgdma_csr_translator -L pcie_ip_bar2_translator -L read_master -L reconf_registers -L altpll_qsys -L sdram -L sgdma -L pcie_ip -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneiv_hssi_ver -L cycloneiv_pcie_hip_ver -L cycloneiv_ver $TOP_LEVEL_NAME
+  vsim -t ps -L work -L work_lib -L pipe_interface_internal -L reset_controller_internal -L altgx_internal -L pcie_internal_hip -L irq_mapper -L crosser -L width_adapter -L rsp_xbar_mux_005 -L rsp_xbar_mux_003 -L rsp_xbar_demux_004 -L rsp_xbar_demux_003 -L rsp_xbar_demux_002 -L cmd_xbar_mux_004 -L cmd_xbar_mux_003 -L cmd_xbar_mux_002 -L cmd_xbar_demux_007 -L cmd_xbar_demux_006 -L cmd_xbar_demux_005 -L cmd_xbar_demux_004 -L cmd_xbar_demux_003 -L cmd_xbar_demux_001 -L rsp_xbar_mux -L rsp_xbar_demux -L cmd_xbar_demux -L rst_controller -L burst_adapter -L limiter -L id_router_004 -L id_router_003 -L id_router_002 -L addr_router_006 -L addr_router_005 -L addr_router_003 -L addr_router_001 -L id_router -L addr_router -L sgdma_csr_translator_avalon_universal_slave_0_agent_rsp_fifo -L sgdma_csr_translator_avalon_universal_slave_0_agent -L pcie_ip_bar2_translator_avalon_universal_master_0_agent -L sgdma_csr_translator -L pcie_ip_bar2_translator -L read_master -L reconf_registers -L altpll_qsys -L sdram -L sgdma -L pcie_ip -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneiv_hssi_ver -L cycloneiv_pcie_hip_ver -L cycloneiv_ver $TOP_LEVEL_NAME
 }
 
 # ----------------------------------------
 # Elaborate the top level design with novopt option
 alias elab_debug {
   echo "\[exec\] elab_debug"
-  vsim -novopt -t ps -L work -L work_lib -L pipe_interface_internal -L reset_controller_internal -L altgx_internal -L pcie_internal_hip -L irq_mapper -L async_fifo -L width_adapter -L rsp_xbar_mux_005 -L rsp_xbar_mux_003 -L rsp_xbar_demux_004 -L rsp_xbar_demux_003 -L rsp_xbar_demux_002 -L cmd_xbar_mux_004 -L cmd_xbar_mux_003 -L cmd_xbar_mux_002 -L cmd_xbar_demux_007 -L cmd_xbar_demux_006 -L cmd_xbar_demux_005 -L cmd_xbar_demux_004 -L cmd_xbar_demux_003 -L cmd_xbar_demux_001 -L rsp_xbar_mux -L rsp_xbar_demux -L cmd_xbar_demux -L rst_controller -L burst_adapter -L limiter -L id_router_004 -L id_router_003 -L id_router_002 -L addr_router_006 -L addr_router_005 -L addr_router_003 -L addr_router_001 -L id_router -L addr_router -L sgdma_csr_translator_avalon_universal_slave_0_agent_rsp_fifo -L sgdma_csr_translator_avalon_universal_slave_0_agent -L pcie_ip_bar2_translator_avalon_universal_master_0_agent -L sgdma_csr_translator -L pcie_ip_bar2_translator -L read_master -L reconf_registers -L altpll_qsys -L sdram -L sgdma -L pcie_ip -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneiv_hssi_ver -L cycloneiv_pcie_hip_ver -L cycloneiv_ver $TOP_LEVEL_NAME
+  vsim -novopt -t ps -L work -L work_lib -L pipe_interface_internal -L reset_controller_internal -L altgx_internal -L pcie_internal_hip -L irq_mapper -L crosser -L width_adapter -L rsp_xbar_mux_005 -L rsp_xbar_mux_003 -L rsp_xbar_demux_004 -L rsp_xbar_demux_003 -L rsp_xbar_demux_002 -L cmd_xbar_mux_004 -L cmd_xbar_mux_003 -L cmd_xbar_mux_002 -L cmd_xbar_demux_007 -L cmd_xbar_demux_006 -L cmd_xbar_demux_005 -L cmd_xbar_demux_004 -L cmd_xbar_demux_003 -L cmd_xbar_demux_001 -L rsp_xbar_mux -L rsp_xbar_demux -L cmd_xbar_demux -L rst_controller -L burst_adapter -L limiter -L id_router_004 -L id_router_003 -L id_router_002 -L addr_router_006 -L addr_router_005 -L addr_router_003 -L addr_router_001 -L id_router -L addr_router -L sgdma_csr_translator_avalon_universal_slave_0_agent_rsp_fifo -L sgdma_csr_translator_avalon_universal_slave_0_agent -L pcie_ip_bar2_translator_avalon_universal_master_0_agent -L sgdma_csr_translator -L pcie_ip_bar2_translator -L read_master -L reconf_registers -L altpll_qsys -L sdram -L sgdma -L pcie_ip -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneiv_hssi_ver -L cycloneiv_pcie_hip_ver -L cycloneiv_ver $TOP_LEVEL_NAME
 }
 
 # ----------------------------------------

@@ -7,7 +7,7 @@ reset_controller_internal:                                    ./libraries/reset_
 altgx_internal:                                               ./libraries/altgx_internal/                                              
 pcie_internal_hip:                                            ./libraries/pcie_internal_hip/                                           
 irq_mapper:                                                   ./libraries/irq_mapper/                                                  
-async_fifo:                                                   ./libraries/async_fifo/                                                  
+crosser:                                                      ./libraries/crosser/                                                     
 width_adapter:                                                ./libraries/width_adapter/                                               
 rsp_xbar_mux_005:                                             ./libraries/rsp_xbar_mux_005/                                            
 rsp_xbar_mux_003:                                             ./libraries/rsp_xbar_mux_003/                                            

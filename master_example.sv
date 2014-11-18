@@ -107,7 +107,7 @@ pll pll_inst(
 	assign soc_clk = CLOCK_50;
 	
 
-	//assign DRAM_CLK = CLOCK_50;
+	assign DRAM_CLK = CLOCK_50;
 	
 		
 	always_ff @(posedge CLOCK_50) begin
@@ -142,7 +142,7 @@ pll pll_inst(
 amm_master_qsys_with_pcie amm_master_inst  ( 
                 .clk_clk				(soc_clk),  				  // clk.clk
                 .reset_reset_n				(KEY[0]),                  	          // reset.reset_n
-                .altpll_sdram_clk                       (DRAM_CLK),
+         //       .altpll_sdram_clk                       (DRAM_CLK),
 		.sdram_addr			(DRAM_ADDR),         			  // new_sdram_controller_0_wire.addr
                 .sdram_ba				(DRAM_BA),           			  // ba
                 .sdram_cas_n			(DRAM_CAS_N),        			  // cas_n
