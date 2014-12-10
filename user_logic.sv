@@ -8,33 +8,32 @@ module user_logic #(
 	input logic reset,
 	//input logic write_n,
 	//input logic read_n,
-	input logic rdwr_cntl,
-	input logic n_action,
-	output logic indicator,
-	input logic add_data_sel,
-	input logic [ADDRESSWIDTH-1:0] read_address,
-	output logic[DATAWIDTH-1:0] display_data,
+	input logic rdwr_cntl,					// Control Read or Write to a slave module.
+	input logic n_action,					// Trigger the Read or Write. Additional signals for users to control reading or writing instead of consecutive reads/writes. Can be removed if required. 
+	input logic add_data_sel,				// Interfaced to switch. Selects either Data or Address to be displayed on the Seven Segment Displays.
+	input logic [ADDRESSWIDTH-1:0] read_address,		// read_address if required to be sent from another block. Can be unused if consecutive reads are required.
+	output logic[DATAWIDTH-1:0] display_data,		// Display data for the Seven Seg dislays.
 	
 	// Control interface to write master
 	input  logic write_control_done,	 		   // Asserted and held when Master is done writing last word.Start next request on the next cycle.	
 	output logic write_control_fixed_location,		   // When set Master will not increment address
-	output logic [ADDRESSWIDTH-1:0] write_control_write_base, // Address to write data into
+	output logic [ADDRESSWIDTH-1:0] write_control_write_base,  // Address to write data into
 	output logic [ADDRESSWIDTH-1:0] write_control_write_length,// Number of bytes to transfer. Must be multiple of DATAWIDTH
 	output logic write_control_go,				   // Start write	
 	// user logic data interface to write master 
 	output logic write_user_write_buffer,  		 	// Write signal
 	output logic [DATAWIDTH-1:0] write_user_buffer_data,    // Write Data
-	input logic write_user_buffer_full,				// Buffer full signal. Don't write if asserted
+	input logic write_user_buffer_full,			// Buffer full signal. Don't write if asserted
 	// Control interface to read master
 	input logic read_control_done,//Asserted and held when Master is done writing last word.Start next request on the next cycle.	
 	output logic read_control_fixed_location,	    	//When set Master will not increment address
-	output logic [ADDRESSWIDTH-1:0]read_control_read_base,//Address to read Data from
+	output logic [ADDRESSWIDTH-1:0]read_control_read_base,	//Address to read Data from
 	output logic [ADDRESSWIDTH-1:0]read_control_read_length,//Number of bytes to read. Must be multiple of DATAWIDTH
-	output logic read_control_go,		// Start read
+	output logic read_control_go,				// Start read
 	// user logic data interface to read master 
-	output logic read_user_read_buffer,		// Read signal
+	output logic read_user_read_buffer,			// Read signal
 	input logic [DATAWIDTH-1:0]read_user_buffer_output_data,// Valid data to be read when user_data_available is asserted
-	input logic read_user_data_available		//Read data is available.Assert user_read_buffer only when this is asserted.
+	input logic read_user_data_available			//Read data is available.Assert user_read_buffer only when this is asserted.
 );
 
 
@@ -52,12 +51,6 @@ state_t state, nextState;
 
 assign display_data = add_data_sel ? address : ((rdwr_cntl) ? 0 : read_data) ;
 
-always_comb begin 
-	if ((address > 28'h00000000) & !rdwr_cntl) 
-		indicator = 1;
-	else 
-		indicator = 0;
-end
 
 always_ff @ (posedge clk) begin
 	if(!reset) begin
