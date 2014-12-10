@@ -68,10 +68,9 @@ always_ff @ (posedge clk) begin
 	end else begin
 		state <= nextState;
 		address <= nextAddress;
-		//address <= 28'h00000004;
+		//address <= 28'h08000000;
 		wr_data <= nextData;
 		//wr_data <= 32'hf00fbeeb;
-		//wr_data <= 32'hdeadbeef;
 		read_data <= nextRead_data;
 	end
 end	
