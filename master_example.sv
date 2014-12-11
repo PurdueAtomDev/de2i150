@@ -92,7 +92,6 @@ logic ctl_rd_done;
 logic usr_rd_buffer;
 logic [DATAWIDTH-1:0]usr_rd_buffer_data;
 logic usr_rd_buffer_nonempty;
-logic indicator;
 logic [31:0] display_data;
 /* 
 pll pll_inst(
@@ -132,9 +131,6 @@ always_ff @(posedge CLOCK_50) begin
 		if (usr_wr_buffer_data == 32'hFFFFFFFF) begin
 			LEDG[5] <= 1;
 		end	
-		if ( indicator == 1) begin 
-			LEDG[3] <= 1;
-		end
 	end
 end	
 
@@ -185,7 +181,6 @@ user_logic user_logic_inst (
 	.reset				(KEY[0]),
 	.rdwr_cntl			(SW[17]),
 	.n_action			(KEY[1]),
-	.indicator			(indicator),
 	.add_data_sel			(SW[16]),
 	.read_address			(SW[7:0]),
 	.display_data			(display_data),
