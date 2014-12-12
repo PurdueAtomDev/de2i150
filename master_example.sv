@@ -136,43 +136,43 @@ end
 
 //amm_master_qsys amm_master_inst  ( 
 amm_master_qsys_with_pcie amm_master_inst  ( 
-        .clk_clk				(soc_clk),  				  // clk.clk
-        .reset_reset_n				(KEY[0]),                  	          // reset.reset_n
- //     .altpll_sdram_clk               	(DRAM_CLK),
+	.clk_clk				(soc_clk),  				  // clk.clk
+	.reset_reset_n				(KEY[0]),                  	          // reset.reset_n
+	.altpll_sdram_clk               	(DRAM_CLK),
 	.sdram_addr				(DRAM_ADDR),         			  // new_sdram_controller_0_wire.addr
-        .sdram_ba				(DRAM_BA),           			  // ba
-        .sdram_cas_n				(DRAM_CAS_N),        			  // cas_n
-        .sdram_cke				(DRAM_CKE),          			  // cke
-        .sdram_cs_n				(DRAM_CS_N),         			  // cs_n
-        .sdram_dq				(DRAM_DQ),           			  // dq
-        .sdram_dqm				(DRAM_DQM),          			  // dqm
-        .sdram_ras_n				(DRAM_RAS_N),        			  // ras_n
-        .sdram_we_n				(DRAM_WE_N),         			  // we_n
+	.sdram_ba				(DRAM_BA),           			  // ba
+	.sdram_cas_n				(DRAM_CAS_N),        			  // cas_n
+	.sdram_cke				(DRAM_CKE),          			  // cke
+	.sdram_cs_n				(DRAM_CS_N),         			  // cs_n
+	.sdram_dq				(DRAM_DQ),           			  // dq
+	.sdram_dqm				(DRAM_DQM),          			  // dqm
+	.sdram_ras_n				(DRAM_RAS_N),        			  // ras_n
+	.sdram_we_n				(DRAM_WE_N),         			  // we_n
 				 
-        .write_master_control_fixed_location	(ctl_wr_fixed_location),		  // write_master_control.fixed_location
-        .write_master_control_write_base	(ctl_wr_addr_base),    			  // write_base
-        .write_master_control_write_length	(ctl_wr_length),   			  // write_length
-
-        .write_master_control_go		(ctl_wr_go),             		  // go
-        .write_master_control_done		(ctl_wr_done),           		  // done
-        .write_master_user_write_buffer		(usr_wr_buffer),      			  // write_master_user.write_buffer
-        .write_master_user_buffer_input_data	(usr_wr_buffer_data), 			  // buffer_input_data
-        .write_master_user_buffer_full		(usr_wr_buffer_full),       		  // buffer_full
+	.write_master_control_fixed_location	(ctl_wr_fixed_location),		  // write_master_control.fixed_location
+	.write_master_control_write_base	(ctl_wr_addr_base),    			  // write_base
+	.write_master_control_write_length	(ctl_wr_length),   			  // write_length
+	
+	.write_master_control_go		(ctl_wr_go),             		  // go
+	.write_master_control_done		(ctl_wr_done),           		  // done
+	.write_master_user_write_buffer		(usr_wr_buffer),      			  // write_master_user.write_buffer
+	.write_master_user_buffer_input_data	(usr_wr_buffer_data), 			  // buffer_input_data
+	.write_master_user_buffer_full		(usr_wr_buffer_full),       		  // buffer_full
 				 
 	.read_master_control_fixed_location	(ctl_rd_fixed_location),		  //read_master_control.fixed_location
 	.read_master_control_read_base		(ctl_rd_addr_base),		          //read_base
 	.read_master_control_read_length	(ctl_rd_length),			  //read_length
-
+	
 	.read_master_control_go			(ctl_rd_go),				  //go
 	.read_master_control_done		(ctl_rd_done),				  //done
 	.read_master_user_read_buffer		(usr_rd_buffer),			  //read_master_user.read_buffer
 	.read_master_user_buffer_output_data	(usr_rd_buffer_data),			  //buffer_output_data
 	.read_master_user_data_available	(usr_rd_buffer_nonempty),		  //data_available
-
+	
 	.pcie_ip_refclk_export           	(PCIE_REFCLK_P),                      // pcie_ip_refclk.export
 	.pcie_ip_pcie_rstn_export        	(PCIE_PERST_N),             	  // pcie_ip_pcie_rstn.export
 	.pcie_ip_rx_in_rx_datain_0       	(PCIE_RX_P),                          // pcie_ip_rx_in.rx_datain_0
-        .pcie_ip_tx_out_tx_dataout_0     	(PCIE_TX_P)                           // pcie_ip_tx_out.tx_dataout_0
+	.pcie_ip_tx_out_tx_dataout_0     	(PCIE_TX_P)                           // pcie_ip_tx_out.tx_dataout_0
 );
 
 
