@@ -25,13 +25,13 @@ int main(void)
 	void *lib_handle;
 	PCIE_HANDLE hPCIe;
 
-	lib_handle = PCIE_Load();
+	lib_handle = PCIE_Load();		// Dynamically Load the PCIE library
 	if (!lib_handle)
 	{
 		printf("PCIE_Load failed\n");
 		return 0;
 	}
-	hPCIe = PCIE_Open(0,0,0);
+	hPCIe = PCIE_Open(0,0,0);		// Every device is a like a file in UNIX. Opens the PCIE device for reading/writing
 
 	if (!hPCIe)
 	{
@@ -40,10 +40,10 @@ int main(void)
 	}
 
 	//test CRA
-	test32(hPCIe, CRA);
+	test32(hPCIe, CRA);			// Test the Configuration Registers for reads and writes
 
 	//test SDRAM
-	testDMA(hPCIe,SDRAM);
+	testDMA(hPCIe,SDRAM);			// Test the SDRAM for reads and writes
 	return 0;
 }
 
