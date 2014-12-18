@@ -529,4 +529,7 @@ set_global_assignment -name QIP_FILE amm_master_qsys_with_pcie/synthesis/amm_mas
 set_global_assignment -name VERILOG_FILE SEG_HEX.v
 set_global_assignment -name SYSTEMVERILOG_FILE user_logic.sv
 set_global_assignment -name SYSTEMVERILOG_FILE master_example.sv
+set_global_assignment -name TIMEQUEST_MULTICORNER_ANALYSIS ON
+set_global_assignment -name SMART_RECOMPILE ON
+set_global_assignment -name NUM_PARALLEL_PROCESSORS ALL
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

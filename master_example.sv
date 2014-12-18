@@ -138,7 +138,7 @@ end
 amm_master_qsys_with_pcie amm_master_inst  ( 
 	.clk_clk				(soc_clk),  				  // clk.clk
 	.reset_reset_n				(KEY[0]),                  	          // reset.reset_n
-	.altpll_sdram_clk               	(DRAM_CLK),
+//	.altpll_sdram_clk               	(DRAM_CLK),
 	.sdram_addr				(DRAM_ADDR),         			  // new_sdram_controller_0_wire.addr
 	.sdram_ba				(DRAM_BA),           			  // ba
 	.sdram_cas_n				(DRAM_CAS_N),        			  // cas_n
@@ -182,7 +182,7 @@ user_logic user_logic_inst (
 	.rdwr_cntl			(SW[17]),
 	.n_action			(KEY[1]),
 	.add_data_sel			(SW[16]),
-	.read_address			(SW[7:0]),
+	.rdwr_address			(SW[15:0]),
 	.display_data			(display_data),
 	.write_control_fixed_location	(ctl_wr_fixed_location),
 	.write_control_write_base	(ctl_wr_addr_base),
