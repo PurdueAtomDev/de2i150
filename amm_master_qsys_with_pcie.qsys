@@ -12,6 +12,14 @@
    element $${FILENAME}
    {
    }
+   element Custom_Slave_0
+   {
+      datum _sortIndex
+      {
+         value = "8";
+         type = "int";
+      }
+   }
    element altpll_qsys
    {
       datum _sortIndex
@@ -21,8 +29,16 @@
       }
       datum sopceditor_expanded
       {
-         value = "1";
+         value = "0";
          type = "boolean";
+      }
+   }
+   element Custom_Slave_0.avalon_slave_0
+   {
+      datum baseAddress
+      {
+         value = "512";
+         type = "String";
       }
    }
    element altpll_qsys.c0
@@ -97,7 +113,7 @@
       }
       datum sopceditor_expanded
       {
-         value = "1";
+         value = "0";
          type = "boolean";
       }
    }
@@ -165,7 +181,7 @@
       }
       datum sopceditor_expanded
       {
-         value = "1";
+         value = "0";
          type = "boolean";
       }
    }
@@ -205,7 +221,7 @@
  <parameter name="projectName" value="master_example.qpf" />
  <parameter name="sopcBorderPoints" value="false" />
  <parameter name="systemHash" value="1" />
- <parameter name="timeStamp" value="1416346854718" />
+ <parameter name="timeStamp" value="1423769924608" />
  <parameter name="useTestBenchNamingPattern" value="false" />
  <instanceScript></instanceScript>
  <interface name="clk" internal="clk_50.clk_in" type="clock" dir="end" />
@@ -685,6 +701,12 @@
   <parameter name="AUTO_CLOCK_RESET_CLOCK_RATE" value="50000000" />
   <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV GX" />
  </module>
+ <module kind="Custom_Slave" version="1.0" enabled="1" name="Custom_Slave_0">
+  <parameter name="ADDRESSWIDTH" value="3" />
+  <parameter name="DATAWIDTH" value="32" />
+  <parameter name="NUMREGS" value="8" />
+  <parameter name="REGWIDTH" value="32" />
+ </module>
  <connection kind="avalon" version="13.0" start="pcie_ip.bar2" end="sgdma.csr">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x4040" />
@@ -884,6 +906,25 @@
    end="sdram.s1">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x08000000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="clock"
+   version="13.0"
+   start="clk_50.clk"
+   end="Custom_Slave_0.clock" />
+ <connection
+   kind="reset"
+   version="13.0"
+   start="clk_50.clk_reset"
+   end="Custom_Slave_0.reset" />
+ <connection
+   kind="avalon"
+   version="13.0"
+   start="read_master.avalon_master"
+   end="Custom_Slave_0.avalon_slave_0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0200" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
