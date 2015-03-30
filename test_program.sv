@@ -18,13 +18,13 @@ module test_program ();
 //------------------------------------------------------------------
 // Constants 
 //-----------------------------------------------------------------
-	localparam ADDR_W                   = 26;
-        localparam MEMORY_DEPTH		    = 1000;    
-	localparam SYMBOL_W                 = 8;
-	localparam NUM_SYMBOLS              = 4;
+	localparam ADDR_W                   = 26;		//Bit width of the Address bus
+        localparam MEMORY_DEPTH		    = 1000;    		//	
+	localparam SYMBOL_W                 = 8;		// Bit Width of a Byte(Symbol)
+	localparam NUM_SYMBOLS              = 4;		// No. of Symbols in a word.
 	localparam DATA_W                   = NUM_SYMBOLS * SYMBOL_W;
             
-	localparam BURST_W                  = 4;
+	localparam BURST_W                  = 4;		
 	localparam MAX_BURST                = 1;
    
 	localparam SLAVE_SPAN               = 32'h1000;
