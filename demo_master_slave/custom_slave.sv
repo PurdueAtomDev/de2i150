@@ -16,6 +16,7 @@ module custom_slave #(
 	input logic n_action,					// Trigger the Read or Write. Additional control to avoid continuous transactions. Not a required signal. Can and should be removed for actual application.
 	input logic add_data_sel,				// Interfaced to switch. Selects either Data or Address to be displayed on the Seven Segment Displays.
 	input logic [MASTER_ADDRESSWIDTH-1:0] rdwr_address,	// read_address if required to be sent from another block. Can be unused if consecutive reads are required.
+	output logic [MASTER_ADDRESSWIDTH-1:0] display_data,    // Debug information being sent via conduit to top level	
 
 	// Bus Slave Interface
         input logic [SLAVE_ADDRESSWIDTH-1:0] slave_address,
@@ -79,18 +80,18 @@ end
 
 // Master Side
 
-assign address = reg_index<<2 + SDRAM_ADDR;
+//assign address = reg_index<<2 + SDRAM_ADDR;
 
 always_ff @ ( posedge clk ) begin 
 	if (!reset_n) begin 
-	//	address <= 0;
+		address <= SDRAM_ADDR;
 		reg_index <= 0;
 		state <= IDLE;
 		wr_data <= 0 ;
 		read_data <= 32'hFEEDFEED; 
 	end else begin 
 		state <= nextState;
-	//	address <= nextAddress;
+		address <= nextAddress;
 		reg_index <= nextRegIndex;
 		wr_data <= nextData;
 		read_data <= nextRead_data;
@@ -102,7 +103,7 @@ end
 // the following code has commented lines for how this could be done.
 always_comb begin 
 	nextState = state;
-	//nextAddress = address;
+	nextAddress = address;
 	nextRegIndex = reg_index;
 	//nextData = wr_data;
 	nextRead_data = master_readdata;
@@ -111,7 +112,7 @@ always_comb begin
 			if ( csr_registers[0] == START_BYTE && reg_index < NUMREGS) begin 
 				nextState = WRITE;
 				nextRegIndex = reg_index + 1;
-				//nextAddress = address + 4;
+				nextAddress = address + 4;
 				//nextData = wr_data;
 			end else if ( csr_registers[0] == STOP_BYTE && reg_index >= 0 ) begin 
 				nextState = READ_REQ; 
