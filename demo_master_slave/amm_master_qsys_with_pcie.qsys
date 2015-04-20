@@ -29,7 +29,7 @@
    {
       datum baseAddress
       {
-         value = "16512";
+         value = "0";
          type = "String";
       }
    }
@@ -189,7 +189,7 @@
  <parameter name="projectName" value="master_example.qpf" />
  <parameter name="sopcBorderPoints" value="false" />
  <parameter name="systemHash" value="1" />
- <parameter name="timeStamp" value="1427746128600" />
+ <parameter name="timeStamp" value="1429542012494" />
  <parameter name="useTestBenchNamingPattern" value="false" />
  <instanceScript></instanceScript>
  <interface name="clk" internal="clk_50.clk_in" type="clock" dir="end" />
@@ -376,7 +376,7 @@
   <parameter name="SLAVE_ADDRESS_MAP_3" value="0" />
   <parameter name="SLAVE_ADDRESS_MAP_4" value="0" />
   <parameter name="SLAVE_ADDRESS_MAP_5" value="0" />
-  <parameter name="SLAVE_ADDRESS_MAP_1_0" value="15" />
+  <parameter name="SLAVE_ADDRESS_MAP_1_0" value="7" />
   <parameter name="SLAVE_ADDRESS_MAP_3_2" value="0" />
   <parameter name="SLAVE_ADDRESS_MAP_5_4" value="0" />
   <parameter name="deviceFamily" value="Cyclone IV GX" />
@@ -734,19 +734,19 @@
  <connection
    kind="avalon"
    version="13.0"
-   start="custom_module.avalon_master"
-   end="sdram.s1">
+   start="pcie_ip.bar1_0"
+   end="custom_module.avalon_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x08000000" />
+  <parameter name="baseAddress" value="0x0000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
    kind="avalon"
    version="13.0"
-   start="pcie_ip.bar1_0"
-   end="custom_module.avalon_slave">
+   start="custom_module.avalon_master"
+   end="sdram.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x4080" />
+  <parameter name="baseAddress" value="0x08000000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />

@@ -12,7 +12,7 @@
 # or its authorized distributors. Please refer to the applicable 
 # agreement for further details.
 
-# ACDS 13.0sp1 232 linux 2015.03.30.17:40:45
+# ACDS 13.0sp1 232 linux 2015.04.20.11:04:21
 
 # ----------------------------------------
 # vcs - auto-generated simulation script
@@ -117,7 +117,7 @@ vcs -lca -timescale=1ps/1ps -sverilog +verilog2001ext+.v -ntb_opts dtm $USER_DEF
   $QSYS_SIMDIR/submodules/altera_merlin_master_agent.sv \
   $QSYS_SIMDIR/submodules/altera_merlin_slave_translator.sv \
   $QSYS_SIMDIR/submodules/altera_merlin_master_translator.sv \
-  $QSYS_SIMDIR/submodules/custom_slave.sv \
+  $QSYS_SIMDIR/submodules/custom_master_slave.sv \
   $QSYS_SIMDIR/submodules/amm_master_qsys_with_pcie_altpll_qsys.vo \
   $QSYS_SIMDIR/submodules/amm_master_qsys_with_pcie_sdram.v \
   $QSYS_SIMDIR/submodules/amm_master_qsys_with_pcie_sgdma.v \

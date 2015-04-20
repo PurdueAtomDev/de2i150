@@ -12,7 +12,7 @@
 # or its authorized distributors. Please refer to the applicable 
 # agreement for further details.
 
-# ACDS 13.0sp1 232 linux 2015.03.30.17:40:45
+# ACDS 13.0sp1 232 linux 2015.04.20.11:04:21
 
 # ----------------------------------------
 # vcsmx - auto-generated simulation script
@@ -186,7 +186,7 @@ if [ $SKIP_COM -eq 0 ]; then
   vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_master_agent.sv"                            -work pcie_ip_bar2_translator_avalon_universal_master_0_agent     
   vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_slave_translator.sv"                        -work sgdma_csr_translator                                        
   vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/altera_merlin_master_translator.sv"                       -work pcie_ip_bar2_translator                                     
-  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/custom_slave.sv"                                          -work custom_module                                               
+  vlogan +v2k -sverilog "$QSYS_SIMDIR/submodules/custom_master_slave.sv"                                   -work custom_module                                               
   vlogan +v2k           "$QSYS_SIMDIR/submodules/amm_master_qsys_with_pcie_altpll_qsys.vo"                 -work altpll_qsys                                                 
   vlogan +v2k           "$QSYS_SIMDIR/submodules/amm_master_qsys_with_pcie_sdram.v"                        -work sdram                                                       
   vlogan +v2k           "$QSYS_SIMDIR/submodules/amm_master_qsys_with_pcie_sgdma.v"                        -work sgdma                                                       

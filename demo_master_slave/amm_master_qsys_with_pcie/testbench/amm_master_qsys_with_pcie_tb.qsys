@@ -56,7 +56,7 @@
  <parameter name="projectName" value="master_example.qpf" />
  <parameter name="sopcBorderPoints" value="false" />
  <parameter name="systemHash" value="1" />
- <parameter name="timeStamp" value="1427751652263" />
+ <parameter name="timeStamp" value="1429542268816" />
  <parameter name="useTestBenchNamingPattern" value="true" />
  <instanceScript></instanceScript>
  <module

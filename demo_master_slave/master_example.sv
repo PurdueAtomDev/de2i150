@@ -102,23 +102,10 @@ always_ff @(posedge CLOCK_50) begin
 	end
 end	
 
-//IB//amm_master_qsys_custom_with_bfm u0 (
-//IB//        .clk_clk                            (soc_clk), 
-//IB//        .reset_reset_n                      (KEY[0]), 
-//IB//        .custom_module_conduit_rdwr_cntl    (SW[17]), 
-//IB//        .custom_module_conduit_n_action     (KEY[1]), 
-//IB//        .custom_module_conduit_add_data_sel (SW[16]),
-//IB//        .custom_module_conduit_rdwr_address (SW[15:0])
-//IB//    );
-
-
-
-
 //amm_master_qsys amm_master_inst  ( 
  amm_master_qsys_with_pcie amm_master_inst  ( 
  	.clk_clk				(soc_clk),  				  // clk.clk
  	.reset_reset_n				(KEY[0]),                  	          // reset.reset_n
- //	.altpll_sdram_clk               	(DRAM_CLK),
  	.sdram_addr				(DRAM_ADDR),         			  // new_sdram_controller_0_wire.addr
  	.sdram_ba				(DRAM_BA),           			  // ba
  	.sdram_cas_n				(DRAM_CAS_N),        			  // cas_n
@@ -128,10 +115,11 @@ end
  	.sdram_dqm				(DRAM_DQM),          			  // dqm
  	.sdram_ras_n				(DRAM_RAS_N),        			  // ras_n
  	.sdram_we_n				(DRAM_WE_N),         			  // we_n 
-	//.custom_module_conduit_rdwr_cntl    	(SW[17]),
-	//.custom_module_conduit_n_action     	(KEY[1]),
-	//.custom_module_conduit_add_data_sel 	(SW[16]),
-	//.custom_module_conduit_rdwr_address 	(SW[15:0]),
+	.custom_module_conduit_rdwr_cntl	(SW[17]),
+	.custom_module_conduit_n_action		(KEY[1]),
+	.custom_module_conduit_add_data_sel	(SW[16]),
+	.custom_module_conduit_rdwr_address	(SW[15:0]),
+	.custom_module_conduit_display_data	(display_data),
  	.pcie_ip_refclk_export           	(PCIE_REFCLK_P),                      // pcie_ip_refclk.export
  	.pcie_ip_pcie_rstn_export        	(PCIE_PERST_N),             	  // pcie_ip_pcie_rstn.export
  	.pcie_ip_rx_in_rx_datain_0       	(PCIE_RX_P),                          // pcie_ip_rx_in.rx_datain_0
@@ -140,37 +128,37 @@ end
  
  
  
-//IB// SEG_HEX hex0(
-//IB// 	   .iDIG(display_data[31:28]),         
-//IB// 	   .oHEX_D(HEX7)
-//IB//            );  
-//IB// SEG_HEX hex1(                              
-//IB//            .iDIG(display_data[27:24]),
-//IB//            .oHEX_D(HEX6)
-//IB//            );
-//IB// SEG_HEX hex2(                           
-//IB//            .iDIG(display_data[23:20]),
-//IB//            .oHEX_D(HEX5)
-//IB//            );
-//IB// SEG_HEX hex3(                              
-//IB//            .iDIG(display_data[19:16]),
-//IB//            .oHEX_D(HEX4)
-//IB//            );
-//IB// SEG_HEX hex4(                               
-//IB//            .iDIG(display_data[15:12]),
-//IB//            .oHEX_D(HEX3)
-//IB//            );
-//IB// SEG_HEX hex5(                          
-//IB//            .iDIG(display_data[11:8]), 
-//IB//            .oHEX_D(HEX2)
-//IB//            );
-//IB// SEG_HEX hex6(                      
-//IB//            .iDIG(display_data[7:4]),
-//IB//            .oHEX_D(HEX1)
-//IB//            );
-//IB// SEG_HEX hex7(              
-//IB//            .iDIG(display_data[3:0]) ,
-//IB//            .oHEX_D(HEX0)
-//IB//            );
+ SEG_HEX hex7(
+ 	   .iDIG(display_data[31:28]),         
+ 	   .oHEX_D(HEX7)
+            );  
+ SEG_HEX hex6(                              
+            .iDIG(display_data[27:24]),
+            .oHEX_D(HEX6)
+            );
+ SEG_HEX hex5(                           
+            .iDIG(display_data[23:20]),
+            .oHEX_D(HEX5)
+            );
+ SEG_HEX hex4(                              
+            .iDIG(display_data[19:16]),
+            .oHEX_D(HEX4)
+            );
+ SEG_HEX hex3(                               
+            .iDIG(display_data[15:12]),
+            .oHEX_D(HEX3)
+            );
+ SEG_HEX hex2(                          
+            .iDIG(display_data[11:8]), 
+            .oHEX_D(HEX2)
+            );
+ SEG_HEX hex1(                      
+            .iDIG(display_data[7:4]),
+            .oHEX_D(HEX1)
+            );
+ SEG_HEX hex0(              
+            .iDIG(display_data[3:0]) ,
+            .oHEX_D(HEX0)
+            );
 
 endmodule 

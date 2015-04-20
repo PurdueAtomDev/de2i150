@@ -5,11 +5,11 @@
  version="1.0"
  fabric="QSYS">
  <!-- Format version 13.0sp1 232 (Future versions may contain additional information.) -->
- <!-- 2015.03.30.17:42:16 -->
+ <!-- 2015.04.20.11:05:12 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1427751735</value>
+  <value>1429542311</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -618,7 +618,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="bar0_size_mask">
    <type>int</type>
-   <value>15</value>
+   <value>7</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -922,7 +922,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="BAR Size">
    <type>[Ljava.lang.Integer;</type>
-   <value>15,0,15,0,0,0</value>
+   <value>7,0,15,0,0,0</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -1938,7 +1938,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="SLAVE_ADDRESS_MAP_1_0">
    <type>int</type>
-   <value>15</value>
+   <value>7</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -3364,7 +3364,7 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>custom_module</moduleName>
     <slaveName>avalon_slave</slaveName>
     <name>custom_module.avalon_slave</name>
-    <baseAddress>16512</baseAddress>
+    <baseAddress>0</baseAddress>
     <span>128</span>
    </memoryBlock>
   </interface>
@@ -10601,6 +10601,12 @@ parameters are a RESULT of the module parameters. -->
     <width>28</width>
     <role>export</role>
    </port>
+   <port>
+    <name>display_data</name>
+    <direction>Output</direction>
+    <width>32</width>
+    <role>export</role>
+   </port>
   </interface>
  </module>
  <connection
@@ -11425,6 +11431,57 @@ parameters are a RESULT of the module parameters. -->
   <endConnectionPoint>reset</endConnectionPoint>
  </connection>
  <connection
+   name="pcie_ip.bar1_0/custom_module.avalon_slave"
+   kind="avalon"
+   version="13.0"
+   start="pcie_ip.bar1_0"
+   end="custom_module.avalon_slave">
+  <parameter name="arbitrationPriority">
+   <type>int</type>
+   <value>1</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="baseAddress">
+   <type>java.math.BigInteger</type>
+   <value>0x0000</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="defaultConnection">
+   <type>boolean</type>
+   <value>false</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="deviceFamily">
+   <type>java.lang.String</type>
+   <value>UNKNOWN</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="generateLegacySim">
+   <type>boolean</type>
+   <value>false</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <startModule>pcie_ip</startModule>
+  <startConnectionPoint>bar1_0</startConnectionPoint>
+  <endModule>custom_module</endModule>
+  <endConnectionPoint>avalon_slave</endConnectionPoint>
+ </connection>
+ <connection
    name="custom_module.avalon_master/sdram.s1"
    kind="avalon"
    version="13.0"
@@ -11475,57 +11532,54 @@ parameters are a RESULT of the module parameters. -->
   <endModule>sdram</endModule>
   <endConnectionPoint>s1</endConnectionPoint>
  </connection>
- <connection
-   name="pcie_ip.bar1_0/custom_module.avalon_slave"
-   kind="avalon"
-   version="13.0"
-   start="pcie_ip.bar1_0"
-   end="custom_module.avalon_slave">
-  <parameter name="arbitrationPriority">
-   <type>int</type>
-   <value>1</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="baseAddress">
-   <type>java.math.BigInteger</type>
-   <value>0x4080</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="defaultConnection">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>pcie_ip</startModule>
-  <startConnectionPoint>bar1_0</startConnectionPoint>
-  <endModule>custom_module</endModule>
-  <endConnectionPoint>avalon_slave</endConnectionPoint>
- </connection>
+ <plugin>
+  <instanceCount>5</instanceCount>
+  <name>clock_source</name>
+  <type>com.altera.entityinterfaces.IElementClass</type>
+  <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
+  <displayName>Clock Output</displayName>
+  <version>13.0</version>
+ </plugin>
+ <plugin>
+  <instanceCount>1</instanceCount>
+  <name>altera_pcie_hard_ip</name>
+  <type>com.altera.entityinterfaces.IElementClass</type>
+  <subtype>com.altera.entityinterfaces.IModule</subtype>
+  <displayName>IP_Compiler for PCI Express</displayName>
+  <version>13.0</version>
+ </plugin>
+ <plugin>
+  <instanceCount>1</instanceCount>
+  <name>reset_source</name>
+  <type>com.altera.entityinterfaces.IElementClass</type>
+  <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
+  <displayName>Reset Output</displayName>
+  <version>13.0</version>
+ </plugin>
+ <plugin>
+  <instanceCount>1</instanceCount>
+  <name>clock_source</name>
+  <type>com.altera.entityinterfaces.IElementClass</type>
+  <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
+  <displayName>Clock Output</displayName>
+  <version>13.0</version>
+ </plugin>
+ <plugin>
+  <instanceCount>7</instanceCount>
+  <name>reset</name>
+  <type>com.altera.entityinterfaces.IElementClass</type>
+  <subtype>com.altera.entityinterfaces.IConnection</subtype>
+  <displayName>Reset Connection</displayName>
+  <version>13.0</version>
+ </plugin>
+ <plugin>
+  <instanceCount>10</instanceCount>
+  <name>avalon</name>
+  <type>com.altera.entityinterfaces.IElementClass</type>
+  <subtype>com.altera.entityinterfaces.IConnection</subtype>
+  <displayName>Avalon Memory Mapped Connection</displayName>
+  <version>13.0</version>
+ </plugin>
  <plugin>
   <instanceCount>1</instanceCount>
   <name>custom_module</name>
@@ -11535,35 +11589,11 @@ parameters are a RESULT of the module parameters. -->
   <version>1.0</version>
  </plugin>
  <plugin>
-  <instanceCount>7</instanceCount>
-  <name>avalon_master</name>
-  <type>com.altera.entityinterfaces.IElementClass</type>
-  <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
-  <displayName>Avalon Memory Mapped Master</displayName>
-  <version>13.0</version>
- </plugin>
- <plugin>
   <instanceCount>1</instanceCount>
-  <name>interrupt</name>
-  <type>com.altera.entityinterfaces.IElementClass</type>
-  <subtype>com.altera.entityinterfaces.IConnection</subtype>
-  <displayName>Interrupt Connection</displayName>
-  <version>13.0</version>
- </plugin>
- <plugin>
-  <instanceCount>1</instanceCount>
-  <name>altera_avalon_sgdma</name>
+  <name>clock_source</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IModule</subtype>
-  <displayName>Scatter-Gather DMA Controller</displayName>
-  <version>13.0.1.99.2</version>
- </plugin>
- <plugin>
-  <instanceCount>7</instanceCount>
-  <name>reset</name>
-  <type>com.altera.entityinterfaces.IElementClass</type>
-  <subtype>com.altera.entityinterfaces.IConnection</subtype>
-  <displayName>Reset Connection</displayName>
+  <displayName>Clock Source</displayName>
   <version>13.0</version>
  </plugin>
  <plugin>
@@ -11576,14 +11606,6 @@ parameters are a RESULT of the module parameters. -->
  </plugin>
  <plugin>
   <instanceCount>1</instanceCount>
-  <name>interrupt_receiver</name>
-  <type>com.altera.entityinterfaces.IElementClass</type>
-  <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
-  <displayName>Interrupt Receiver</displayName>
-  <version>13.0</version>
- </plugin>
- <plugin>
-  <instanceCount>1</instanceCount>
   <name>altera_avalon_new_sdram_controller</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IModule</subtype>
@@ -11592,18 +11614,10 @@ parameters are a RESULT of the module parameters. -->
  </plugin>
  <plugin>
   <instanceCount>1</instanceCount>
-  <name>altera_pcie_hard_ip</name>
-  <type>com.altera.entityinterfaces.IElementClass</type>
-  <subtype>com.altera.entityinterfaces.IModule</subtype>
-  <displayName>IP_Compiler for PCI Express</displayName>
-  <version>13.0</version>
- </plugin>
- <plugin>
-  <instanceCount>16</instanceCount>
-  <name>conduit_end</name>
+  <name>interrupt_receiver</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
-  <displayName>Conduit</displayName>
+  <displayName>Interrupt Receiver</displayName>
   <version>13.0</version>
  </plugin>
  <plugin>
@@ -11615,6 +11629,22 @@ parameters are a RESULT of the module parameters. -->
   <version>13.0</version>
  </plugin>
  <plugin>
+  <instanceCount>16</instanceCount>
+  <name>conduit_end</name>
+  <type>com.altera.entityinterfaces.IElementClass</type>
+  <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
+  <displayName>Conduit</displayName>
+  <version>13.0</version>
+ </plugin>
+ <plugin>
+  <instanceCount>7</instanceCount>
+  <name>clock_sink</name>
+  <type>com.altera.entityinterfaces.IElementClass</type>
+  <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
+  <displayName>Clock Input</displayName>
+  <version>13.0</version>
+ </plugin>
+ <plugin>
   <instanceCount>6</instanceCount>
   <name>avalon_slave</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
@@ -11623,19 +11653,27 @@ parameters are a RESULT of the module parameters. -->
   <version>13.0</version>
  </plugin>
  <plugin>
-  <instanceCount>1</instanceCount>
-  <name>reset_source</name>
-  <type>com.altera.entityinterfaces.IElementClass</type>
-  <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
-  <displayName>Reset Output</displayName>
-  <version>13.0</version>
- </plugin>
- <plugin>
   <instanceCount>2</instanceCount>
   <name>interrupt_sender</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
   <displayName>Interrupt Sender</displayName>
+  <version>13.0</version>
+ </plugin>
+ <plugin>
+  <instanceCount>1</instanceCount>
+  <name>altpll</name>
+  <type>com.altera.entityinterfaces.IElementClass</type>
+  <subtype>com.altera.entityinterfaces.IModule</subtype>
+  <displayName>Avalon ALTPLL</displayName>
+  <version>13.0</version>
+ </plugin>
+ <plugin>
+  <instanceCount>1</instanceCount>
+  <name>interrupt</name>
+  <type>com.altera.entityinterfaces.IElementClass</type>
+  <subtype>com.altera.entityinterfaces.IConnection</subtype>
+  <displayName>Interrupt Connection</displayName>
   <version>13.0</version>
  </plugin>
  <plugin>
@@ -11655,30 +11693,6 @@ parameters are a RESULT of the module parameters. -->
   <version>13.0</version>
  </plugin>
  <plugin>
-  <instanceCount>5</instanceCount>
-  <name>clock_source</name>
-  <type>com.altera.entityinterfaces.IElementClass</type>
-  <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
-  <displayName>Clock Output</displayName>
-  <version>13.0</version>
- </plugin>
- <plugin>
-  <instanceCount>1</instanceCount>
-  <name>altpll</name>
-  <type>com.altera.entityinterfaces.IElementClass</type>
-  <subtype>com.altera.entityinterfaces.IModule</subtype>
-  <displayName>Avalon ALTPLL</displayName>
-  <version>13.0</version>
- </plugin>
- <plugin>
-  <instanceCount>10</instanceCount>
-  <name>avalon</name>
-  <type>com.altera.entityinterfaces.IElementClass</type>
-  <subtype>com.altera.entityinterfaces.IConnection</subtype>
-  <displayName>Avalon Memory Mapped Connection</displayName>
-  <version>13.0</version>
- </plugin>
- <plugin>
   <instanceCount>4</instanceCount>
   <name>reset_sink</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
@@ -11687,27 +11701,19 @@ parameters are a RESULT of the module parameters. -->
   <version>13.0</version>
  </plugin>
  <plugin>
-  <instanceCount>7</instanceCount>
-  <name>clock_sink</name>
-  <type>com.altera.entityinterfaces.IElementClass</type>
-  <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
-  <displayName>Clock Input</displayName>
-  <version>13.0</version>
- </plugin>
- <plugin>
   <instanceCount>1</instanceCount>
-  <name>clock_source</name>
-  <type>com.altera.entityinterfaces.IElementClass</type>
-  <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
-  <displayName>Clock Output</displayName>
-  <version>13.0</version>
- </plugin>
- <plugin>
-  <instanceCount>1</instanceCount>
-  <name>clock_source</name>
+  <name>altera_avalon_sgdma</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IModule</subtype>
-  <displayName>Clock Source</displayName>
+  <displayName>Scatter-Gather DMA Controller</displayName>
+  <version>13.0.1.99.2</version>
+ </plugin>
+ <plugin>
+  <instanceCount>7</instanceCount>
+  <name>avalon_master</name>
+  <type>com.altera.entityinterfaces.IElementClass</type>
+  <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
+  <displayName>Avalon Memory Mapped Master</displayName>
   <version>13.0</version>
  </plugin>
  <reportVersion>13.0sp1 232</reportVersion>

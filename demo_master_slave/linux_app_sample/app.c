@@ -6,14 +6,16 @@
 #include "PCIE.h"
 
 //MAX BUFFER FOR DMA
-#define MAXDMA 32
+#define MAXDMA 16
 
 //BASE ADDRESS FOR CONTROL REGISTER
-#define CRA 0x00004080		// This is the starting address of the Custom Slave module. This maps to the address space of the custom module in the Qsys subsystem.
+//#define CRA 0x00004080		// This is the starting address of the Custom Slave module. This maps to the address space of the custom module in the Qsys subsystem.
+#define CRA 0x00000000		// This is the starting address of the Custom Slave module. This maps to the address space of the custom module in the Qsys subsystem.
 
 //BASE ADDRESS TO SDRAM
 #define SDRAM 0x08000000	// This is the starting address of the SDRAM controller. This maps to the address space of the SDRAM controller in the Qsys subsystem.
 #define START_BYTE 0xF00BF00B
+#define STOP_BYTE 0xDEADF00B
 #define RWSIZE (32 / 8)
 PCIE_BAR pcie_bars[] = { PCIE_BAR0, PCIE_BAR1 , PCIE_BAR2 , PCIE_BAR3 , PCIE_BAR4 , PCIE_BAR5 };
 
@@ -44,6 +46,9 @@ int main(void)
 	PCIE_Write32( hPCIe, pcie_bars[0], CRA, START_BYTE);
 	//test SDRAM
 	testDMA(hPCIe,SDRAM);			// Test the SDRAM for reads and writes
+
+	PCIE_Write32( hPCIe, pcie_bars[0], CRA, STOP_BYTE);
+	printf("\nPush up SW[16] to view data stored in SDRAM and use SW[3:0] to select different addresses.\n");
 	return 0;
 }
 
@@ -58,7 +63,6 @@ void test32( PCIE_HANDLE hPCIe, DWORD addr )
 	WORD i = 0;
 	for (i = 0; i < 16 ; i++ )
 	{
-		printf("Testing register %d at addr %x with value %x\n", i, addr, testVal);
 		bPass = PCIE_Write32( hPCIe, pcie_bars[0], addr, testVal);
 		if (!bPass)
 		{
@@ -71,6 +75,8 @@ void test32( PCIE_HANDLE hPCIe, DWORD addr )
 			printf("test FAILED: read did not return success");
 			return;
 		}
+		printf("Testing register %d at addr %x with value %x: ", i, addr, testVal);
+
 		if (testVal == readVal)
 		{
 			printf("Test PASSED: expected %x, received %x\n", testVal, readVal);
@@ -92,8 +98,8 @@ void testDMA( PCIE_HANDLE hPCIe, DWORD addr)
 	DWORD testArray[MAXDMA];
 	DWORD readArray[MAXDMA];
 	
-	WORD i = 0;
-	
+	WORD i = 1;
+	testArray[0] = START_BYTE;
 	while ( i < MAXDMA )
 	{
 		testArray[i] = i  + 0x0f;
@@ -115,6 +121,7 @@ void testDMA( PCIE_HANDLE hPCIe, DWORD addr)
 	i = 0;
 	while ( i < MAXDMA )
 	{
+		printf("Testing SDRAM at addr %x: ", addr);
 		if (testArray[i] == readArray[i])
 		{
 			printf("Test PASSED: expected %x, received %x\n", testArray[i], readArray[i]);
@@ -124,6 +131,7 @@ void testDMA( PCIE_HANDLE hPCIe, DWORD addr)
 			printf("Test FAILED: expected %x, received %x\n", testArray[i], readArray[i]);
 		}
 		i++;
+		addr = addr + 4;
 	}
 	return;
 }

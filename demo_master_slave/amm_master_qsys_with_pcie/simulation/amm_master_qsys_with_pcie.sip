@@ -44,7 +44,7 @@ set_global_assignment -library "lib_amm_master_qsys_with_pcie" -name MISC_FILE [
 set_global_assignment -library "lib_amm_master_qsys_with_pcie" -name MISC_FILE [file join $::quartus(sip_path) "submodules/altera_merlin_master_agent.sv"]
 set_global_assignment -library "lib_amm_master_qsys_with_pcie" -name MISC_FILE [file join $::quartus(sip_path) "submodules/altera_merlin_slave_translator.sv"]
 set_global_assignment -library "lib_amm_master_qsys_with_pcie" -name MISC_FILE [file join $::quartus(sip_path) "submodules/altera_merlin_master_translator.sv"]
-set_global_assignment -library "lib_amm_master_qsys_with_pcie" -name MISC_FILE [file join $::quartus(sip_path) "submodules/custom_slave.sv"]
+set_global_assignment -library "lib_amm_master_qsys_with_pcie" -name MISC_FILE [file join $::quartus(sip_path) "submodules/custom_master_slave.sv"]
 set_global_assignment -library "lib_amm_master_qsys_with_pcie" -name MISC_FILE [file join $::quartus(sip_path) "submodules/amm_master_qsys_with_pcie_altpll_qsys.vo"]
 set_global_assignment -library "lib_amm_master_qsys_with_pcie" -name MISC_FILE [file join $::quartus(sip_path) "submodules/amm_master_qsys_with_pcie_sdram.v"]
 set_global_assignment -library "lib_amm_master_qsys_with_pcie" -name MISC_FILE [file join $::quartus(sip_path) "submodules/amm_master_qsys_with_pcie_sgdma.v"]
