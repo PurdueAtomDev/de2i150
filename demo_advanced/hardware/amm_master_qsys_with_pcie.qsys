@@ -12,6 +12,14 @@
    element $${FILENAME}
    {
    }
+   element User_Module_0
+   {
+      datum _sortIndex
+      {
+         value = "5";
+         type = "int";
+      }
+   }
    element altpll_qsys
    {
       datum _sortIndex
@@ -31,6 +39,14 @@
       {
          value = "1";
          type = "boolean";
+      }
+   }
+   element User_Module_0.avalon_slave_0
+   {
+      datum baseAddress
+      {
+         value = "0";
+         type = "String";
       }
    }
    element altpll_qsys.c0
@@ -166,14 +182,6 @@
          type = "String";
       }
    }
-   element user_module_0
-   {
-      datum _sortIndex
-      {
-         value = "5";
-         type = "int";
-      }
-   }
 }
 ]]></parameter>
  <parameter name="clockCrossingAdapter" value="HANDSHAKE" />
@@ -185,13 +193,11 @@
  <parameter name="generationId" value="0" />
  <parameter name="globalResetBus" value="false" />
  <parameter name="hdlLanguage" value="VERILOG" />
- <parameter name="hideFromIPCatalog" value="false" />
  <parameter name="maxAdditionalLatency" value="1" />
  <parameter name="projectName" value="master_example.qpf" />
  <parameter name="sopcBorderPoints" value="false" />
- <parameter name="systemHash" value="0" />
- <parameter name="testBenchDutName" value="" />
- <parameter name="timeStamp" value="0" />
+ <parameter name="systemHash" value="1" />
+ <parameter name="timeStamp" value="1429626639863" />
  <parameter name="useTestBenchNamingPattern" value="false" />
  <instanceScript></instanceScript>
  <interface name="clk" internal="clk_50.clk_in" type="clock" dir="end" />
@@ -257,18 +263,13 @@
    internal="pcie_ip.powerdown"
    type="conduit"
    dir="end" />
- <interface
-   name="user_module_conduit"
-   internal="user_module_0.conduit_end"
-   type="conduit"
-   dir="end" />
- <module kind="clock_source" version="14.0" enabled="1" name="clk_50">
+ <module kind="clock_source" version="13.0" enabled="1" name="clk_50">
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="clockFrequencyKnown" value="true" />
   <parameter name="inputClockFrequency" value="0" />
   <parameter name="resetSynchronousEdges" value="NONE" />
  </module>
- <module kind="altera_pcie_hard_ip" version="14.0" enabled="1" name="pcie_ip">
+ <module kind="altera_pcie_hard_ip" version="13.0" enabled="1" name="pcie_ip">
   <parameter name="under_test" value="0" />
   <parameter name="INTENDED_DEVICE_FAMILY" value="Cyclone IV GX" />
   <parameter name="pcie_qsys" value="1" />
@@ -359,7 +360,6 @@
   <parameter name="CG_IMPL_CRA_AV_SLAVE_PORT" value="1" />
   <parameter name="CG_NO_CPL_REORDERING" value="0" />
   <parameter name="CG_ENABLE_A2P_INTERRUPT" value="0" />
-  <parameter name="p_user_msi_enable" value="0" />
   <parameter name="CG_IRQ_BIT_ENA" value="65535" />
   <parameter name="CB_A2P_ADDR_MAP_IS_FIXED" value="1" />
   <parameter name="CB_A2P_ADDR_MAP_NUM_ENTRIES" value="1" />
@@ -388,7 +388,11 @@
   <parameter name="AUTO_CAL_BLK_CLK_RESET_DOMAIN" value="4" />
   <parameter name="AUTO_DEVICE" value="EP4CGX150DF31C7" />
  </module>
- <module kind="altera_avalon_sgdma" version="14.0" enabled="1" name="sgdma">
+ <module
+   kind="altera_avalon_sgdma"
+   version="13.0.1.99.2"
+   enabled="1"
+   name="sgdma">
   <parameter name="addressWidth" value="32" />
   <parameter name="alwaysDoMaxBurst" value="true" />
   <parameter name="avalonMMByteReorderMode" value="0" />
@@ -407,7 +411,7 @@
  </module>
  <module
    kind="altera_avalon_new_sdram_controller"
-   version="14.0"
+   version="13.0.1.99.2"
    enabled="1"
    name="sdram">
   <parameter name="TAC" value="5.5" />
@@ -434,7 +438,7 @@
   <parameter name="clockRate" value="50000000" />
   <parameter name="componentName" value="$${FILENAME}_sdram" />
  </module>
- <module kind="altpll" version="14.0" enabled="1" name="altpll_qsys">
+ <module kind="altpll" version="13.0" enabled="1" name="altpll_qsys">
   <parameter name="HIDDEN_CUSTOM_ELABORATION">altpll_avalon_elaboration</parameter>
   <parameter name="HIDDEN_CUSTOM_POST_EDIT">altpll_avalon_post_edit</parameter>
   <parameter name="INTENDED_DEVICE_FAMILY" value="Cyclone IV GX" />
@@ -601,27 +605,26 @@
   <parameter name="AUTO_INCLK_INTERFACE_CLOCK_RATE" value="50000000" />
   <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV GX" />
  </module>
- <module kind="user_module" version="1.0" enabled="1" name="user_module_0">
+ <module kind="User_Module" version="1.0" enabled="1" name="User_Module_0">
   <parameter name="MASTER_ADDRESSWIDTH" value="28" />
   <parameter name="SLAVE_ADDRESSWIDTH" value="3" />
   <parameter name="DATAWIDTH" value="32" />
   <parameter name="NUMREGS" value="8" />
   <parameter name="REGWIDTH" value="32" />
-  <parameter name="AUTO_CLOCK_CLOCK_RATE" value="50000000" />
  </module>
- <connection kind="avalon" version="14.0" start="pcie_ip.bar2" end="sgdma.csr">
+ <connection kind="avalon" version="13.0" start="pcie_ip.bar2" end="sgdma.csr">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x4040" />
   <parameter name="defaultConnection" value="false" />
  </connection>
- <connection kind="avalon" version="14.0" start="pcie_ip.bar2" end="pcie_ip.cra">
+ <connection kind="avalon" version="13.0" start="pcie_ip.bar2" end="pcie_ip.cra">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x0000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
    kind="avalon"
-   version="14.0"
+   version="13.0"
    start="sgdma.descriptor_read"
    end="pcie_ip.txs">
   <parameter name="arbitrationPriority" value="1" />
@@ -630,110 +633,110 @@
  </connection>
  <connection
    kind="avalon"
-   version="14.0"
+   version="13.0"
    start="sgdma.descriptor_write"
    end="pcie_ip.txs">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x80000000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
- <connection kind="avalon" version="14.0" start="sgdma.m_read" end="pcie_ip.txs">
+ <connection kind="avalon" version="13.0" start="sgdma.m_read" end="pcie_ip.txs">
   <parameter name="arbitrationPriority" value="2" />
   <parameter name="baseAddress" value="0x80000000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
- <connection kind="avalon" version="14.0" start="sgdma.m_write" end="pcie_ip.txs">
+ <connection kind="avalon" version="13.0" start="sgdma.m_write" end="pcie_ip.txs">
   <parameter name="arbitrationPriority" value="2" />
   <parameter name="baseAddress" value="0x80000000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
    kind="interrupt"
-   version="14.0"
+   version="13.0"
    start="pcie_ip.rxm_irq"
    end="sgdma.csr_irq">
   <parameter name="irqNumber" value="2" />
  </connection>
  <connection
    kind="reset"
-   version="14.0"
+   version="13.0"
    start="clk_50.clk_reset"
    end="sgdma.reset" />
  <connection
    kind="clock"
-   version="14.0"
+   version="13.0"
    start="clk_50.clk"
    end="altpll_qsys.inclk_interface" />
- <connection kind="avalon" version="14.0" start="sgdma.m_write" end="sdram.s1">
+ <connection kind="avalon" version="13.0" start="sgdma.m_write" end="sdram.s1">
   <parameter name="arbitrationPriority" value="2" />
   <parameter name="baseAddress" value="0x08000000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
    kind="reset"
-   version="14.0"
+   version="13.0"
    start="clk_50.clk_reset"
    end="sdram.reset" />
  <connection
    kind="reset"
-   version="14.0"
+   version="13.0"
    start="pcie_ip.pcie_core_reset"
    end="sdram.reset" />
  <connection
    kind="reset"
-   version="14.0"
+   version="13.0"
    start="clk_50.clk_reset"
    end="altpll_qsys.inclk_interface_reset" />
  <connection
    kind="reset"
-   version="14.0"
+   version="13.0"
    start="pcie_ip.pcie_core_reset"
    end="altpll_qsys.inclk_interface_reset" />
- <connection kind="avalon" version="14.0" start="sgdma.m_read" end="sdram.s1">
+ <connection kind="avalon" version="13.0" start="sgdma.m_read" end="sdram.s1">
   <parameter name="arbitrationPriority" value="2" />
   <parameter name="baseAddress" value="0x08000000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
    kind="reset"
-   version="14.0"
+   version="13.0"
    start="pcie_ip.pcie_core_reset"
    end="sgdma.reset" />
  <connection
    kind="clock"
-   version="14.0"
+   version="13.0"
    start="pcie_ip.pcie_core_clk"
    end="sgdma.clk" />
  <connection
    kind="clock"
-   version="14.0"
+   version="13.0"
    start="altpll_qsys.c3"
    end="pcie_ip.reconfig_gxbclk" />
  <connection
    kind="clock"
-   version="14.0"
+   version="13.0"
    start="pcie_ip.pcie_core_clk"
    end="pcie_ip.fixedclk" />
  <connection
    kind="clock"
-   version="14.0"
+   version="13.0"
    start="altpll_qsys.c3"
    end="pcie_ip.cal_blk_clk" />
- <connection kind="clock" version="14.0" start="clk_50.clk" end="sdram.clk" />
+ <connection kind="clock" version="13.0" start="clk_50.clk" end="sdram.clk" />
  <connection
    kind="clock"
-   version="14.0"
+   version="13.0"
    start="clk_50.clk"
-   end="user_module_0.clock" />
+   end="User_Module_0.clock" />
  <connection
    kind="reset"
-   version="14.0"
+   version="13.0"
    start="clk_50.clk_reset"
-   end="user_module_0.reset" />
+   end="User_Module_0.reset" />
  <connection
    kind="avalon"
-   version="14.0"
-   start="user_module_0.avalon_master"
+   version="13.0"
+   start="User_Module_0.avalon_master"
    end="sdram.s1">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x08000000" />
@@ -741,9 +744,9 @@
  </connection>
  <connection
    kind="avalon"
-   version="14.0"
+   version="13.0"
    start="pcie_ip.bar1_0"
-   end="user_module_0.avalon_slave_0">
+   end="User_Module_0.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x0000" />
   <parameter name="defaultConnection" value="false" />
