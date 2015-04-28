@@ -9,7 +9,7 @@
 #define MAXDMA 32
 
 //BASE ADDRESS FOR CONTROL REGISTER
-#define CRA 0x00004080		// This is the starting address of the Custom Slave module. This maps to the address space of the custom module in the Qsys subsystem.
+#define CRA 0x00000000		// This is the starting address of the Custom Slave module. This maps to the address space of the custom module in the Qsys subsystem.
 
 //BASE ADDRESS TO SDRAM
 #define SDRAM 0x08000000	// This is the starting address of the SDRAM controller. This maps to the address space of the SDRAM controller in the Qsys subsystem.
